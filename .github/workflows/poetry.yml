@@ -31,24 +31,6 @@ jobs:
           poetry run coverage report
           poetry run coverage xml
         working-directory: python
-  publish:
-    name: Publish App on PyPI
-    if: startsWith(github.ref, 'refs/tags/')
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: "3.9"
-      - name: Install poetry
-        run: pip install poetry
-        working-directory: python
       - name: Scan CVEs
         run: poetry export --without-hashes -f requirements.txt | safety check --full-report --stdin
-        working-directory: python
-      - name: Publish app
-        env:
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-        run: poetry publish --build --username "__token__" --password "$PYPI_TOKEN"
         working-directory: python
