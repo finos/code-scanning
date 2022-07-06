@@ -4,14 +4,14 @@ What's the best security tool out there?
 ## Gradle
 The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html).
 
-The `build.gradle` file defines a dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638).
+The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail.
 
 Check `gradle/build.gradle` and `.github/workflows/gradle.yml` for more info.
 
 ## Maven
 The maven project uses the [OWASP `dependency-check-maven`](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/) plugin to scan runtime dependencies for known vulnerabilities.
 
-The `pom.xml` file defines a dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638).
+The `pom.xml` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail.
 
 Check `maven/pom.xml` and `.github/workflows/maven.yml` for more info.
 
@@ -34,8 +34,8 @@ The `python/pyproject.toml` includes a commented dependency called `insecure-pac
 Check `python/pyproject.toml` and `.github/workflows/poetry.yml` for more info.
 
 ## Scala
-*TODO - add a vulnerable dependency, test, then comment out*
-
 The Scala project uses the [`sbt-dependency-check` plugin](https://github.com/albuch/sbt-dependency-check) to scan incoming dependencies for CVEs.
 
-Check `scala/project` folder and `.github/workflows/scala.yml` for more info.
+The `build.sbt` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail.
+
+Check `scala/build.sbt` folder and `.github/workflows/scala.yml` for more info.
