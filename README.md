@@ -16,12 +16,12 @@ The maven project uses the [OWASP `dependency-check-maven`](https://jeremylong.g
 Check `maven/pom.xml` and `.github/workflows/maven.yml` for more info.
 
 ## Node
-*TODO - add a vulnerable dependency, test, then comment out*
 
 The NodeJS project uses `npm audit` built-in command, adding the `--omit=dev` option, to limit scope only to non dev dependencies.
 
 Check `node/package.json` and `.github/workflows/node.yml` for more info.
 
+In `node/package.json.vulnerable` you'll notice one additional `dependency`, `chokidar: 2.0.3`, which introduces 2 CVEs; to test it, simply `cp node/package.json.vulnerable node/package.json` and re-run `npm install ; npm audit --omit=dev`.
 
 ## Python
 The python project is built with [Poetry](https://python-poetry.org/), see `python/pyproject.toml`.
