@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'scala/**'
+      - '.github/workflows/scala.yml'
 
 jobs:
   test:
