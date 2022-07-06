@@ -16,11 +16,11 @@ The `pom.xml` file defines a (commented) dependency on `struts2` version 2.3.8, 
 Check `maven/pom.xml` and `.github/workflows/maven.yml` for more info.
 
 ## Node
-The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs) built-in command, which limits scope only to non dev dependencies by default.
+The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs), which limits scope only to non dev dependencies by default.
+
+In `node/package.json.vulnerable` you'll notice one additional `dependency`, `chokidar: 2.0.3`, which introduces 2 CVEs; to test it, simply `cp node/package.json.vulnerable node/package.json` and re-run `npm install ; npx --yes auditjs ossi`.
 
 Check `node/package.json` and `.github/workflows/node.yml` for more info.
-
-In `node/package.json.vulnerable` you'll notice one additional `dependency`, `chokidar: 2.0.3`, which introduces 2 CVEs; to test it, simply `cp node/package.json.vulnerable node/package.json` and re-run `npm install ; npm audit --omit=dev`.
 
 ## Python
 The python project is built with [Poetry](https://python-poetry.org/), see `python/pyproject.toml`.
