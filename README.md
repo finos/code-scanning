@@ -27,7 +27,7 @@ The python project is built with [Poetry](https://python-poetry.org/), see `pyth
 
 To scan for CVEs, we use:
 1. `poetry export` command, which generates a `requirements.txt` file
-2. The [`safety` library](https://pyup.io/safety/), which checks `requirementrs.txt` entries against NVD DB.
+2. The [`safety` library](https://pyup.io/safety/), which checks `requirements.txt` entries against NVD DB.
 
 The `python/pyproject.toml` includes a commented dependency called `insecure-package`, which introduces CVEs into the project and tests whether the scan works properly or not.
 
