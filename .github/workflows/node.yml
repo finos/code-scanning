@@ -25,7 +25,5 @@ jobs:
         working-directory: node
       - run: npm run build --if-present
         working-directory: node
-      - run: npm test
-        working-directory: node
       - run: npm audit
         working-directory: node
