@@ -3,7 +3,7 @@ name: Gradle CI
 on:
   push:
     paths:
-      - 'gradle/'
+      - 'gradle/**'
 
 jobs:
   build:

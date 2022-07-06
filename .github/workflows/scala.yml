@@ -3,7 +3,7 @@ name: Scala CI
 on:
   push:
     paths:
-      - 'scala/'
+      - 'scala/**'
 
 jobs:
   test:

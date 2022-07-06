@@ -3,7 +3,7 @@ name: Poetry CI
 on:
   push:
     paths:
-      - 'python/'
+      - 'python/**'
 
 jobs:
   test:

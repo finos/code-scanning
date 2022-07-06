@@ -3,7 +3,7 @@ name: Maven CI
 on:
   push:
     paths:
-      - 'maven/'
+      - 'maven/**'
 
 jobs:
   build:
