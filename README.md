@@ -16,7 +16,7 @@ The `pom.xml` file defines a (commented) dependency on `struts2` version 2.3.8, 
 Check `maven/pom.xml` and `.github/workflows/maven.yml` for more info.
 
 ## Node
-The NodeJS project uses `npm audit` built-in command, adding the `--omit=dev` option, to limit scope only to non dev dependencies.
+The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs) built-in command, which limits scope only to non dev dependencies by default.
 
 Check `node/package.json` and `.github/workflows/node.yml` for more info.
 
