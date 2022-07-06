@@ -24,12 +24,19 @@ buildscript {
 dependencies {
     implementation 'com.google.guava:guava:29.0-jre'
     implementation "joda-time:joda-time:2.10.9"
+    // implementation "org.apache.struts:struts2-core:2.3.8"
+    // testImplementation "org.apache.struts:struts2-core:2.3.8"
+    implementation "org.apache.struts:struts2-core:6.0.0"
     testImplementation "junit:junit:4.12"
 }
 
 java {
 	withSourcesJar()
 	withJavadocJar()
+}
+
+dependencyCheck {
+    failBuildOnCVSS=5
 }
 
 publishing {

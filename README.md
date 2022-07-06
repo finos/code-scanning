@@ -2,21 +2,20 @@
 What's the best security tool out there?
 
 ## Gradle
-*TODO - add a vulnerable dependency, test, then comment out*
-
 The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html).
+
+The `build.gradle` file defines a dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638).
 
 Check `gradle/build.gradle` and `.github/workflows/gradle.yml` for more info.
 
 ## Maven
 The maven project uses the [OWASP `dependency-check-maven`](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/) plugin to scan runtime dependencies for known vulnerabilities.
 
-The `pom.xml` defines a dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638).
+The `pom.xml` file defines a dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638).
 
 Check `maven/pom.xml` and `.github/workflows/maven.yml` for more info.
 
 ## Node
-
 The NodeJS project uses `npm audit` built-in command, adding the `--omit=dev` option, to limit scope only to non dev dependencies.
 
 Check `node/package.json` and `.github/workflows/node.yml` for more info.
