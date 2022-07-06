@@ -15,8 +15,8 @@ classifiers = [
 python = "^3.8"
 colorama = ""
 safety = "2.0.0"
-# Enable it to see the scan failing
-# insecure-package = "0.1.0"
+# Enable it to see the scan failing, although ignored by safety-policy.yml
+insecure-package = "0.1.0"
 
 [tool.poetry.dev-dependencies]
 black = ""
