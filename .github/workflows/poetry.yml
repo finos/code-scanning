@@ -33,5 +33,5 @@ jobs:
           poetry run coverage xml
         working-directory: python
       - name: Scan CVEs
-        run: poetry export --without-hashes -f requirements.txt | safety check --full-report --stdin
+        run: poetry export --without-hashes -f requirements.txt | poetry run safety check --full-report --stdin
         working-directory: python
