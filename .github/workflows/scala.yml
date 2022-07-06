@@ -1,0 +1,24 @@
+name: Scala CI
+
+on:
+  push:
+    paths:
+      - 'scala/'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: temurin
+        java-version: 8
+    - name: Build and Test
+      run: sbt -v +test
+      working-directory: scala
+    - name: Scan for CVEs
+      run: sbt dependencyCheck
+      working-directory: scala

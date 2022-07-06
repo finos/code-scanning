@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'org.owasp.dependencycheck'
+
+group = 'org.finos'
+version = '0.0.1'
+
+sourceCompatibility = 1.8 // java 8
+targetCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.owasp:dependency-check-gradle:7.1.1'
+    }
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:29.0-jre'
+    implementation "joda-time:joda-time:2.10.9"
+    testImplementation "junit:junit:4.12"
+}
+
+java {
+	withSourcesJar()
+	withJavadocJar()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+		from components.java
+        }
+    }
+}
+
+wrapper {
+    gradleVersion = "7.3.3"
+    distributionType = Wrapper.DistributionType.ALL
+}
+
