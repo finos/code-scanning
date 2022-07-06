@@ -15,6 +15,7 @@ classifiers = [
 python = "^3.8"
 colorama = ""
 safety = "2.0.0"
+insecure-package = "0.1.0"
 
 [tool.poetry.dev-dependencies]
 black = ""
