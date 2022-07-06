@@ -1,0 +1,8 @@
+{
+    "ignore": [
+        { "id": "sonatype-2021-0459", "reason": "Testing whitelist" },
+        { "id": "CVE-2020-28469", "reason": "Testing whitelist" },
+        { "id": "sonatype-2017-0655", "reason": "Testing whitelist" },
+        { "id": "CVE-2021-23440", "reason": "Testing whitelist" }
+    ]
+}

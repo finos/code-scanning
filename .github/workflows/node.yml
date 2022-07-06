@@ -23,5 +23,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
         working-directory: node
-      - run: npx --yes auditjs ossi
+      - run: npm run scan-cves
         working-directory: node

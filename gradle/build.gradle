@@ -5,7 +5,7 @@ apply plugin: 'org.owasp.dependencycheck'
 group = 'org.finos'
 version = '0.0.1'
 
-sourceCompatibility = 1.8 // java 8
+sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
