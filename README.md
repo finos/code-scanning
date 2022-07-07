@@ -57,26 +57,26 @@ In this codebase you'll find a folder for each of the build platforms listed bel
 2. Configures a CVE scanning tool that is specific to the build tool
 3. Defines a suppression file that ignores the error caused by the CVE
 
+The documentation below will also provide the GitHub Actions code that will enable scanning without the need to update anything in your build descriptor files.
+
 ## Node
 
 The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs), which limits scope only to non dev dependencies by default.
 
-In `node/package.json` you'll notice that the last `dependency` is `chokidar: 2.0.3`, which introduces 4 CVEs; however, the CVE scanning - which you can run simply using `npm install ; npm run scan-cves` passes, because `whitelist.json` instructs the scanner to ignore such issues.
-
-To enable the scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
+To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
 
 ```
-name: Node.js CVE Scan
+name: Node.js CVE Scanning
 
 on:
   pull_request:
     paths:
       - 'package.json'
-      - '.github/workflows/node.yml'
+      - '.github/workflows/cve-scanning.yml'
   push:
     paths:
       - 'package.json'
-      - '.github/workflows/node.yml'
+      - '.github/workflows/cve-scanning.yml'
     schedule:
       # Run every day at 5am and 5pm
       - cron: '0 5,17 * * *'
@@ -94,44 +94,115 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npx --yes auditjs ossi --whitelist whitelist.json
-        working-directory: node
 ```
 
-You will also need to create a `whitelist.json` file in the project root, check an example in the `node` folder.
+Also create a `whitelist.json` file in the project root, check an example in the `node` folder.
+
+If you want to test it, add a dependency against `"chokidar" : "2.0.3"`(https://pypi.org/project/insecure-package/), re-run the `npx --yes auditjs ossi --whitelist whitelist.json` command mentioned in the GitHub Action above and expect the build to fail.
 
 ## Python
+For Python projects we recommend using the [`safety` library](https://pyup.io/safety/) library, which checks `requirements.txt` entries against NVD DB.
 
-The python project is built with [Poetry](https://python-poetry.org/), see `python/pyproject.toml`.
+To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
 
-To scan for CVEs, we use:
-1. `poetry export` command, which generates a `requirements.txt` file
-2. The [`safety` library](https://pyup.io/safety/), which checks `requirements.txt` entries against NVD DB.
-
-The `python/pyproject.toml` includes a commented dependency called `insecure-package`, which introduces CVEs into the project and tests whether the scan works properly or not; the `safety-policy.yml` file will suppress such issue, in order to test the mechanism to ignore false positives.
-
-If you want to run the check locally, you can run:
 ```
-poetry install
-poetry export --without-hashes -f requirements.txt | poetry run safety check --full-report --stdin --policy-file safety-policy.yml
+name: Python CVE Scanning
+
+on:
+  pull_request:
+    paths:
+      - 'pyproject.toml'
+      - '.github/workflows/cve-scanning.yml'
+  push:
+    paths:
+      - 'pyproject.toml'
+      - '.github/workflows/cve-scanning.yml'
+    schedule:
+      # Run every day at 5am and 5pm
+      - cron: '0 5,17 * * *'
+
+jobs:
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+        poetry-version: ["1.1.11"]
+        os: [ubuntu-18.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install safety
+        run: pip3 install safety
+      - name: Run safety check
+        run: safety check --full-report -r requirements.txt --policy-file safety-policy.yml
 ```
 
-Check `python/pyproject.toml` and `.github/workflows/poetry.yml` for more info.
+If you are using [Poetry](https://python-poetry.org/), add the following steps before the `Install safety` block:
+```
+      - name: Run image
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: Export requirements.txt from poetry
+        run: poetry export --without-hashes -f requirements.txt > requirements.txt
+```
 
-## Gradle
+Make sure to create a `safety-policy.yml` file, which will define which errors/warnings to suppress as false positives; you can find a sample file in the `python` subfolder.
 
-The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html).
-
-The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `suppressions.xml` file, used to manage false positives.
-
-Simply run `./gradlew dependencyCheckAnalyze` to run the CVE scan; check `gradle/build.gradle` and `.github/workflows/gradle.yml` for more info.
+If you want to test it, add a dependency against [`insecure-package`](https://pypi.org/project/insecure-package/), re-run the `safety check` command mentioned in the GitHub Action above and expect the build to fail.
 
 ## Maven
 
 The maven project uses the [OWASP `dependency-check-maven`](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/) plugin to scan runtime dependencies for known vulnerabilities.
 
-The `pom.xml` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `suppressions.xml` file, used to manage false positives.
+To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
 
-The CVE scanning is included in the `check` build phase; as such, it will be invoked when running `mvn package`; check `maven/pom.xml` and `.github/workflows/maven.yml` for more info.
+```
+name: Maven CVE Scanning
+
+on:
+  pull_request:
+    paths:
+      - 'pom.xml'
+      - '.github/workflows/cve-scanning.yml'
+  push:
+    paths:
+      - 'pom.xml'
+      - '.github/workflows/cve-scanning.yml'
+    schedule:
+      # Run every day at 5am and 5pm
+      - cron: '0 5,17 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Build with Maven
+        run: mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=7 -DsuppressionFile="suppressions.xml"
+```
+
+Make sure to create a `suppressions.xml` file, which will define which errors/warnings to suppress as false positives; you can find a sample file in the `maven` subfolder.
+
+If you prefer to integrate the Maven plugin in your `pom.xml`, checkout `maven/pom.xml` as example.
+
+## Gradle
+
+The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html). Sadly, Gradle [doesn't allow to invoke plugins without altering the build manifest](https://discuss.gradle.org/t/invoking-tasks-provided-by-a-plugin-without-altering-the-build-file/27235), namely `build.gradle`, but changes are quite basic, so please keep reading.
+
+The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `suppressions.xml` file, used to manage false positives.
+
+Run `./gradlew dependencyCheckAnalyze` to run the CVE scan; check `gradle/build.gradle` and `.github/workflows/gradle.yml` for more info.
 
 ## Scala
 
