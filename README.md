@@ -6,14 +6,14 @@
 
 This is a pretty wide question, so let's try to decompose it:
 
-- On average, 99% of the code shipped in a software artifact is composed of downstream libraries (aka dependencies), built, released and managed but teams, communities and companies _we know nothing about_. 
+- On average, 99% of the code shipped in a software artifact is composed of downstream libraries (aka dependencies), built, released and managed by teams, communities and companies _we know nothing about_. 
 - A developer has very little awareness of the codebase quality and software development process in the downstream dependencies of a project. 
 - To make it worse, every programming language AND build tool has a different way of consuming downstream dependencies.
 - Therefore there is not one common way to check the security of software that is being consumed.
 
-So the first (security) challenge that every developer is nowadays facing is: how can I check the list of my (direct and transitive) dependencies against this database of CVEs?
+So the first (security) challenge that every developer faces nowadays is: how can I check the list of my (direct and transitive) dependencies against this database of CVEs?
 
-The good news is that [NVD](https://nvd.nist.gov/) and other similar initiatives have built an important knowledge base containing known vulnerabilities (or CVEs) affect which libraries.  
+The good news is that [NVD](https://nvd.nist.gov/) and other similar initiatives have built an important knowledge base containing known vulnerabilities (or CVEs) affecting many popular libraries.  
 
 The other 1% is code written by the developer.  This code can contain vulnerabilities unknown to everyone.  This is where _static application security testing_ (or simply Static Analysis) comes in handy.
 
@@ -32,11 +32,11 @@ _Everytime that code is changed, security scanning should kick in_
 
 _A newly discovered CVE that is affecting a downstream library makes the current code vulnerable._
 
-It is very important to notify developers quickly and privately, to prevent malicious actors taking advantage of the vulnerability. This can be easily achieved by running the same reactive scan **on a schedule**, for example daily (see examples below).
+It is very important to notify developers quickly and privately, to prevent malicious actors from taking advantage of the vulnerability. This can be easily achieved by running the same reactive scan **on a schedule**, for example daily (see examples below).
 
 ## The solution
 
-We've evaluated **a lot** of services and tools but for some reason or other it's extremely hard to find one solution that ticks all boxes. This is why we decided to create this repository.  FINOS Security Scanning sets a baseline for the security scanning that our hosted projects need:
+We've evaluated **a lot** of services and tools but for some reason or other it's extremely hard to find one solution that ticks all the boxes. This is why we decided to create this repository.  FINOS Security Scanning sets a baseline for the security scanning that our hosted projects need:
 
 - 5 supported build platforms - maven, gradle, python (and poetry), scala and node.
 - A common approach to CVE scanning mechanism, which only examines runtime dependencies (anything else is - for now - out of scope).
@@ -51,7 +51,7 @@ It's worth emphatizing the importance of warning/error suppression; one of the r
 
 ## Code Layout
 
-In this codebase you'll find a folder for each of the build platforms listed below.  Each folder includes a "Hello World" project, with a build descriptor that:
+In this codebase you'll find a folder for each of the build platforms listed below. Each folder includes a "Hello World" project, with a build descriptor that:
 
 1. Pulls in a CVE
 2. Configures a CVE scanning tool that is specific to the build tool
