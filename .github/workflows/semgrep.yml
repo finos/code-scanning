@@ -1,0 +1,11 @@
+name: Static code analysis
+
+jobs:
+  semgrep:
+    name: run-semgrep
+    runs-on: ubuntu-20.04
+    container:
+      image: returntocorp/semgrep
+    steps:
+    - uses: actions/checkout@v3
+    - run: semgrep ci
