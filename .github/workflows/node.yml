@@ -22,13 +22,3 @@ jobs:
         working-directory: node
       - run: npm run scan-cves
         working-directory: node
-
-  static_code_analysis:
-    runs-on: ubuntu-latest
-    name: Horusec Scan
-    steps:
-      - name: Run Horusec
-        id: run_horusec
-        uses: fike/horusec-action@v0.2.1
-        with:
-          arguments: --project-path "./node" --ignore "node_modules/**, whitelist.json, package.json, package-lock.json"

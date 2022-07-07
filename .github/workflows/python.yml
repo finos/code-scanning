@@ -34,13 +34,3 @@ jobs:
       - name: Scan CVEs
         run: poetry export --without-hashes -f requirements.txt | poetry run safety check --full-report --stdin --policy-file safety-policy.yml
         working-directory: python
-
-  static_code_analysis:
-    runs-on: ubuntu-latest
-    name: Horusec Scan
-    steps:
-      - name: Run Horusec
-        id: run_horusec
-        uses: fike/horusec-action@v0.2.1
-        with:
-          arguments: --project-path "./python" --ignore ".gradle, .venv, .vscode, tests"
