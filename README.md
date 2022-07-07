@@ -1,5 +1,37 @@
-# security-comparison
-What's the best security tool out there?
+# security-scanning
+
+## The problem
+**How can we keep all FINOS hosted codebase secure?** This is a pretty wide question, so let's try to decompose it.
+
+On average, 99% of the code shipped in a software is composed by downstream libraries (aka dependencies), built, released and managed but teams, communities and companies we know nothing about. A developer has very little chances to be aware of the codebase quality and software development processes across all downstream dependencies of a project. To make it worse, every programming language AND build tool may have different ways to consume downstream dependencies, therefore there is not one common way to check the security of software that is being consumed.
+
+The good news is that [NVD](https://nvd.nist.gov/) and other similar initiatives have built an important knowledge base on which known vulnerabilities (or CVEs) affect which library, so the first (security) challenge that every developer is nowadays facing is: how can I check the list of my (direct and transitive) dependencies against the database of CVEs ?
+
+The other 1% is code written by the developer, which can also be affected by bugs, but those are still unknown by everyone; this is where Static application security testing (or simply Static Analysis) comes in handy.
+
+At [FINOS](finos.org), we're always strive to improve the security of our hosted code; right now, we're taking 2 main directions:
+
+1. **Reactive** (to code changes) scans: everytime that code is changed, security scanning should kick in
+    - If the change affects the build descriptor (and therefore the list of downstream dependencies is updated), the list should be checked against the (public) list of CVEs. IF the scan returns a negative response, the change MUST be rejected; to achieve such behaviour, enforcing [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) is mandatory.
+    - If the change affects the rest of the code, SAST should kick in; this part is still work in progress
+2. **Proactive** (to new CVEs) scans: imagine to write a software today, which consumes a downstream library that is clear from CVEs; tomorrow, a new CVE that affects this downstream library (same version as the one being used) is discovered, turning yesterday's software vulnerable. It is very important to notify developers quickly and privately, to avoid that such information can be used by malicious actors against any software adopter. The FINOS Infra team is working on a centralized system that can trigger CVE scans daily and inform teams via email when CVEs are spotted.
+
+## The solution
+To tackle such aspirational goals, we've evaluated **a lot** of services and tools, and for some reason or another, it's extremely hard to find one solution that ticks all boxes. This is why, before moving forward with this hunt, we decided to create this repository.
+
+FINOS Security Scanning sets a baseline for the security scanning that our hosted projects need:
+- 5 supported build platforms - maven, gradle, python (and poetry), scala and node
+- A common approach to CVE scanning mechanism, which only affects runtime dependencies; anything else is - for now - out of scope.
+- Ability to suppress warnings and efficiently manage false positives; such suppressions MUST be part of the codebase, and treated as an extremely important code
+- Ability to run such logic as part of CI/CD (GitHub actions)
+- Documentation that describes how to use the scanning and what to expect
+
+It's worth emphatizing the importance of warning/error suppression; one of the reason for this approach not to be mainstream nowadays is that developers constantly seek productivity, and often see security as a distraction rather than protection; being able to deliver an efficient scanning tool is key to keep developers happy and make sure they use and update scanning configurations.
+
+In this codebase you'll find a folder for each of the build platforms listed below; each folder includes a "Hello World" project, with a build descriptor that delivers 
+1. Pulls in a CVE
+2. Configures a CVE scanning tool that is specific to the build tool
+3. Defines a suppression file that ignores the error caused by the CVE
 
 ## Gradle
 The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html).
