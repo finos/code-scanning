@@ -31,4 +31,4 @@ jobs:
         id: run_horusec
         uses: fike/horusec-action@v0.2.1
         with:
-          arguments: --project-path="./node" --ignore="node_modules/**, whitelist.json, package.json, package-lock.json"
+          arguments: --project-path "./node" --ignore "node_modules/**, whitelist.json, package.json, package-lock.json"

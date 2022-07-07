@@ -38,4 +38,4 @@ jobs:
         id: run_horusec
         uses: fike/horusec-action@v0.2.1
         with:
-          arguments: --project-path="./gradle" --ignore=".gradle"
+          arguments: --project-path "./gradle" --ignore ".gradle"
