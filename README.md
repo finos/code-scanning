@@ -30,7 +30,7 @@ _Everytime that code is changed, security scanning should kick in_
 
 ### Proactive
 
-_A new CVE that affecting a downstream library makes the current code vulnerable._
+_A newly discovered CVE that is affecting a downstream library makes the current code vulnerable._
 
 It is very important to notify developers quickly and privately, to prevent malicious actors taking advantage of the vulnerability. This can be easily achieved by running the same reactive scan **on a schedule**, for example daily (see examples below).
 
