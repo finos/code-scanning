@@ -36,7 +36,7 @@ java {
 
 dependencyCheck {
     failBuildOnCVSS=5
-    suppressionFile="../suppressions.xml"
+    suppressionFile="../allow-list.xml"
 }
 
 publishing {

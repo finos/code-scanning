@@ -6,7 +6,7 @@
     "author": "Maurizio Pillitu <maoo@finos.org> (https://www.finos.org)",
     "license": "Apache-2.0",
     "scripts" : {
-        "scan-cves" : "npx --yes auditjs ossi --whitelist whitelist.json"
+        "scan-cves" : "npx --yes auditjs ossi --whitelist allow-list.json"
     },
     "devDependencies": {
         "dotenv": "^4.0.0",

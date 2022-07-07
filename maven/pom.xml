@@ -24,7 +24,7 @@
             <artifactId>struts2-core</artifactId>
             <!-- <version>6.0.0</version> -->
             <!-- <scope>test</scope> -->
-            <!-- This breaks CVE scanning, assuming the suppression file doesn't include this version/CVEs ; see ../suppressions.xml -->
+            <!-- This breaks CVE scanning, assuming the suppression file doesn't include this version/CVEs ; see ../allow-list.xml -->
             <version>2.3.8</version>
         </dependency>
     </dependencies>
@@ -37,7 +37,7 @@
             <version>7.1.1</version>
             <configuration>
                 <failBuildOnCVSS>7</failBuildOnCVSS>
-                <suppressionFile>../suppressions.xml</suppressionFile>
+                <suppressionFile>../allow-list.xml</suppressionFile>
             </configuration>            
             <executions>
                 <execution>

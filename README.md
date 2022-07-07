@@ -93,12 +93,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npx --yes auditjs ossi --whitelist whitelist.json
+      - run: npx --yes auditjs ossi --whitelist allow-list.json
 ```
 
-Also create a `whitelist.json` file in the project root, check an example in the `node` folder.
+Also create a `allow-list.json` file in the project root, check an example in the `node` folder.
 
-If you want to test it, add a dependency against `"chokidar" : "2.0.3"`(https://pypi.org/project/insecure-package/), re-run the `npx --yes auditjs ossi --whitelist whitelist.json` command mentioned in the GitHub Action above and expect the build to fail.
+If you want to test it, add a dependency against `"chokidar" : "2.0.3"`(https://pypi.org/project/insecure-package/), re-run the `npx --yes auditjs ossi --whitelist allow-list.json` command mentioned in the GitHub Action above and expect the build to fail.
 
 ## Python
 For Python projects we recommend using the [`safety` library](https://pyup.io/safety/) library, which checks `requirements.txt` entries against NVD DB.
@@ -189,10 +189,10 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=7 -DsuppressionFile="suppressions.xml"
+        run: mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=7 -DsuppressionFile="allow-list.xml"
 ```
 
-Make sure to create a `suppressions.xml` file, which will define which errors/warnings to suppress as false positives; you can find a sample file in the `maven` subfolder.
+Make sure to create a `allow-list.xml` file, which will define which errors/warnings to suppress as false positives; you can find a sample file in the `maven` subfolder.
 
 If you prefer to integrate the Maven plugin in your `pom.xml`, checkout `maven/pom.xml` as example.
 
@@ -200,7 +200,7 @@ If you prefer to integrate the Maven plugin in your `pom.xml`, checkout `maven/p
 
 The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html). Sadly, Gradle [doesn't allow to invoke plugins without altering the build manifest](https://discuss.gradle.org/t/invoking-tasks-provided-by-a-plugin-without-altering-the-build-file/27235), namely `build.gradle`, but changes are quite basic, so please keep reading.
 
-The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `suppressions.xml` file, used to manage false positives.
+The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
 
 Run `./gradlew dependencyCheckAnalyze` to run the CVE scan; check `gradle/build.gradle` and `.github/workflows/gradle.yml` for more info.
 
@@ -208,6 +208,6 @@ Run `./gradlew dependencyCheckAnalyze` to run the CVE scan; check `gradle/build.
 
 The Scala project uses the [`sbt-dependency-check` plugin](https://github.com/albuch/sbt-dependency-check) to scan incoming dependencies for CVEs.
 
-The `build.sbt` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `suppressions.xml` file, used to manage false positives.
+The `build.sbt` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
 
 Simply run `sbt dependencyCheck` to run the CVE scan; check `scala/build.sbt` folder and `.github/workflows/scala.yml` for more info.
