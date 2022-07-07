@@ -39,20 +39,20 @@ The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs), which 
 
 In `node/package.json` you'll notice that the last `dependency` is `chokidar: 2.0.3`, which introduces 4 CVEs; however, the CVE scanning - which you can run simply using `npm install ; npm run scan-cves` passes, because `whitelist.json` instructs the scanner to ignore such issues.
 
-To enable the scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
+To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
 
 ```
-name: Node.js CVE Scan
+name: Node.js CVE Scanning
 
 on:
   pull_request:
     paths:
       - 'package.json'
-      - '.github/workflows/node.yml'
+      - '.github/workflows/cve-scanning.yml'
   push:
     paths:
       - 'package.json'
-      - '.github/workflows/node.yml'
+      - '.github/workflows/cve-scanning.yml'
     schedule:
       # Run every day at 5am and 5pm
       - cron: '0 5,17 * * *'
@@ -70,27 +70,64 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npx --yes auditjs ossi --whitelist whitelist.json
-        working-directory: node
 ```
 
 You will also need to create a `whitelist.json` file in the project root, check an example in the `node` folder.
 
 ## Python
-The python project is built with [Poetry](https://python-poetry.org/), see `python/pyproject.toml`.
-
-To scan for CVEs, we use:
-1. `poetry export` command, which generates a `requirements.txt` file
-2. The [`safety` library](https://pyup.io/safety/), which checks `requirements.txt` entries against NVD DB.
+The python scanning uses [`safety` library](https://pyup.io/safety/), which checks `requirements.txt` entries against NVD DB.
 
 The `python/pyproject.toml` includes a commented dependency called `insecure-package`, which introduces CVEs into the project and tests whether the scan works properly or not; the `safety-policy.yml` file will suppress such issue, in order to test the mechanism to ignore false positives.
 
-If you want to run the check locally, you can run:
+To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
+
 ```
-poetry install
-poetry export --without-hashes -f requirements.txt | poetry run safety check --full-report --stdin --policy-file safety-policy.yml
+name: Python CVE Scanning
+
+on:
+  pull_request:
+    paths:
+      - 'pyproject.toml'
+      - '.github/workflows/cve-scanning.yml'
+  push:
+    paths:
+      - 'pyproject.toml'
+      - '.github/workflows/cve-scanning.yml'
+    schedule:
+      # Run every day at 5am and 5pm
+      - cron: '0 5,17 * * *'
+
+jobs:
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+        poetry-version: ["1.1.11"]
+        os: [ubuntu-18.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install safety
+        run: pip3 install safety
+      - name: Run safety check
+        run: safety check --full-report -r requirements.txt --policy-file safety-policy.yml
 ```
 
-Check `python/pyproject.toml` and `.github/workflows/poetry.yml` for more info.
+If you are using [Poetry](https://python-poetry.org/), you can simply add the following steps before the `Install safety` block:
+```
+      - name: Run image
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: Export requirements.txt from poetry
+        run: poetry export --without-hashes -f requirements.txt > requirements.txt
+```
+
+Make sure to create a `safety-policy.yml` file, which will define which errors/warnings to suppress as false positives; you can find a sample file in the `python` subfolder.
 
 ## Gradle
 The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html).
