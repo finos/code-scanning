@@ -29,3 +29,13 @@ jobs:
       - name: CVEs
         run: ./gradlew dependencyCheckAnalyze
         working-directory: gradle
+
+  static_code_analysis:
+    runs-on: ubuntu-latest
+    name: Horusec Scan
+    steps:
+      - name: Run Horusec
+        id: run_horusec
+        uses: fike/horusec-action@v0.2.1
+        with:
+          arguments: --project-path="./gradle" --ignore=".gradle"

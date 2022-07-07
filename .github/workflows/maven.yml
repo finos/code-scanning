@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -20,3 +19,13 @@ jobs:
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
         working-directory: maven
+
+  static_code_analysis:
+    runs-on: ubuntu-latest
+    name: Horusec Scan
+    steps:
+      - name: Run Horusec
+        id: run_horusec
+        uses: fike/horusec-action@v0.2.1
+        with:
+          arguments: --project-path="./maven" --ignore="dependency-reduced-pom.xml"

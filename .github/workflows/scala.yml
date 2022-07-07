@@ -23,3 +23,13 @@ jobs:
     - name: Scan for CVEs
       run: sbt dependencyCheck
       working-directory: scala
+
+  static_code_analysis:
+    runs-on: ubuntu-latest
+    name: Horusec Scan
+    steps:
+      - name: Run Horusec
+        id: run_horusec
+        uses: fike/horusec-action@v0.2.1
+        with:
+          arguments: --project-path="./scala"
