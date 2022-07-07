@@ -36,3 +36,4 @@ jobs:
         with:
           # arguments: -p="./scala"
           arguments: -p="./scala" --config-file-path="horusec-config.json"
+          
