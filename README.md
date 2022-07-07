@@ -34,10 +34,10 @@ In this codebase you'll find a folder for each of the build platforms listed bel
 2. Configures a CVE scanning tool that is specific to the build tool
 3. Defines a suppression file that ignores the error caused by the CVE
 
+The documentation below will also provide the GitHub Actions code that will enable scanning without the need to update anything in your build descriptor files.
+
 ## Node
 The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs), which limits scope only to non dev dependencies by default.
-
-In `node/package.json` you'll notice that the last `dependency` is `chokidar: 2.0.3`, which introduces 4 CVEs; however, the CVE scanning - which you can run simply using `npm install ; npm run scan-cves` passes, because `whitelist.json` instructs the scanner to ignore such issues.
 
 To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
 
@@ -72,12 +72,12 @@ jobs:
       - run: npx --yes auditjs ossi --whitelist whitelist.json
 ```
 
-You will also need to create a `whitelist.json` file in the project root, check an example in the `node` folder.
+Also create a `whitelist.json` file in the project root, check an example in the `node` folder.
+
+If you want to test it, add a dependency against `"chokidar" : "2.0.3"`(https://pypi.org/project/insecure-package/), re-run the `npx --yes auditjs ossi --whitelist whitelist.json` command mentioned in the GitHub Action above and expect the build to fail.
 
 ## Python
 The python scanning uses [`safety` library](https://pyup.io/safety/), which checks `requirements.txt` entries against NVD DB.
-
-The `python/pyproject.toml` includes a commented dependency called `insecure-package`, which introduces CVEs into the project and tests whether the scan works properly or not; the `safety-policy.yml` file will suppress such issue, in order to test the mechanism to ignore false positives.
 
 To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
 
@@ -117,7 +117,7 @@ jobs:
         run: safety check --full-report -r requirements.txt --policy-file safety-policy.yml
 ```
 
-If you are using [Poetry](https://python-poetry.org/), you can simply add the following steps before the `Install safety` block:
+If you are using [Poetry](https://python-poetry.org/), add the following steps before the `Install safety` block:
 ```
       - name: Run image
         uses: abatilo/actions-poetry@v2.0.0
@@ -128,6 +128,8 @@ If you are using [Poetry](https://python-poetry.org/), you can simply add the fo
 ```
 
 Make sure to create a `safety-policy.yml` file, which will define which errors/warnings to suppress as false positives; you can find a sample file in the `python` subfolder.
+
+If you want to test it, add a dependency against [`insecure-package`](https://pypi.org/project/insecure-package/), re-run the `safety check` command mentioned in the GitHub Action above and expect the build to fail.
 
 ## Gradle
 The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html).
