@@ -1,27 +1,29 @@
-name: Node.js CI
+name: Node.js CVE Scan
 
 on:
+  pull_request:
+    paths:
+      - 'package.json'
+      - '.github/workflows/node.yml'
   push:
     paths:
-      - 'node/**'
+      - 'package.json'
       - '.github/workflows/node.yml'
+    schedule:
+      # Run every day at 5am and 5pm
+      - cron: '0 5,17 * * *'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x]
-
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-        working-directory: node
-      - run: npm run scan-cves
+      - run: npx --yes auditjs ossi --whitelist whitelist.json
         working-directory: node

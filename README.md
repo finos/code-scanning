@@ -14,7 +14,7 @@ At [FINOS](finos.org), we're always strive to improve the security of our hosted
 1. **Reactive** (to code changes) scans: everytime that code is changed, security scanning should kick in
     - If the change affects the build descriptor (and therefore the list of downstream dependencies is updated), the list should be checked against the (public) list of CVEs. IF the scan returns a negative response, the change MUST be rejected; to achieve such behaviour, enforcing [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) is mandatory.
     - If the change affects the rest of the code, SAST should kick in; this part is still work in progress
-2. **Proactive** (to new CVEs) scans: imagine to write a software today, which consumes a downstream library that is clear from CVEs; tomorrow, a new CVE that affects this downstream library (same version as the one being used) is discovered, turning yesterday's software vulnerable. It is very important to notify developers quickly and privately, to avoid that such information can be used by malicious actors against any software adopter. The FINOS Infra team is working on a centralized system that can trigger CVE scans daily and inform teams via email when CVEs are spotted.
+2. **Proactive** (to new CVEs) scans: imagine to write a software today, which consumes a downstream library that is clear from CVEs; tomorrow, a new CVE that affects this downstream library (same version as the one being used) is discovered, turning yesterday's software vulnerable. It is very important to notify developers quickly and privately, to avoid that such information can be used by malicious actors against any software adopter. This can be easily achieved by running the same reactive scan on a schedule, for example daily (see examples below).
 
 ## The solution
 To tackle such aspirational goals, we've evaluated **a lot** of services and tools, and for some reason or another, it's extremely hard to find one solution that ticks all boxes. This is why, before moving forward with this hunt, we decided to create this repository.
@@ -22,6 +22,7 @@ To tackle such aspirational goals, we've evaluated **a lot** of services and too
 FINOS Security Scanning sets a baseline for the security scanning that our hosted projects need:
 - 5 supported build platforms - maven, gradle, python (and poetry), scala and node
 - A common approach to CVE scanning mechanism, which only affects runtime dependencies; anything else is - for now - out of scope.
+- Support direct and transitive dependencies
 - Ability to suppress warnings and efficiently manage false positives; such suppressions MUST be part of the codebase, and treated as an extremely important code
 - Ability to run such logic as part of CI/CD (GitHub actions)
 - Documentation that describes how to use the scanning and what to expect
@@ -33,26 +34,46 @@ In this codebase you'll find a folder for each of the build platforms listed bel
 2. Configures a CVE scanning tool that is specific to the build tool
 3. Defines a suppression file that ignores the error caused by the CVE
 
-## Gradle
-The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html).
-
-The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `suppressions.xml` file, used to manage false positives.
-
-Simply run `./gradlew dependencyCheckAnalyze` to run the CVE scan; check `gradle/build.gradle` and `.github/workflows/gradle.yml` for more info.
-
-## Maven
-The maven project uses the [OWASP `dependency-check-maven`](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/) plugin to scan runtime dependencies for known vulnerabilities.
-
-The `pom.xml` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `suppressions.xml` file, used to manage false positives.
-
-The CVE scanning is included in the `check` build phase; as such, it will be invoked when running `mvn package`; check `maven/pom.xml` and `.github/workflows/maven.yml` for more info.
-
 ## Node
 The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs), which limits scope only to non dev dependencies by default.
 
 In `node/package.json` you'll notice that the last `dependency` is `chokidar: 2.0.3`, which introduces 4 CVEs; however, the CVE scanning - which you can run simply using `npm install ; npm run scan-cves` passes, because `whitelist.json` instructs the scanner to ignore such issues.
 
-Check `node/package.json` and `.github/workflows/node.yml` for more info.
+To enable the scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
+
+```
+name: Node.js CVE Scan
+
+on:
+  pull_request:
+    paths:
+      - 'package.json'
+      - '.github/workflows/node.yml'
+  push:
+    paths:
+      - 'package.json'
+      - '.github/workflows/node.yml'
+    schedule:
+      # Run every day at 5am and 5pm
+      - cron: '0 5,17 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npx --yes auditjs ossi --whitelist whitelist.json
+        working-directory: node
+```
+
+You will also need to create a `whitelist.json` file in the project root, check an example in the `node` folder.
 
 ## Python
 The python project is built with [Poetry](https://python-poetry.org/), see `python/pyproject.toml`.
@@ -70,6 +91,20 @@ poetry export --without-hashes -f requirements.txt | poetry run safety check --f
 ```
 
 Check `python/pyproject.toml` and `.github/workflows/poetry.yml` for more info.
+
+## Gradle
+The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html).
+
+The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `suppressions.xml` file, used to manage false positives.
+
+Simply run `./gradlew dependencyCheckAnalyze` to run the CVE scan; check `gradle/build.gradle` and `.github/workflows/gradle.yml` for more info.
+
+## Maven
+The maven project uses the [OWASP `dependency-check-maven`](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/) plugin to scan runtime dependencies for known vulnerabilities.
+
+The `pom.xml` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `suppressions.xml` file, used to manage false positives.
+
+The CVE scanning is included in the `check` build phase; as such, it will be invoked when running `mvn package`; check `maven/pom.xml` and `.github/workflows/maven.yml` for more info.
 
 ## Scala
 The Scala project uses the [`sbt-dependency-check` plugin](https://github.com/albuch/sbt-dependency-check) to scan incoming dependencies for CVEs.
