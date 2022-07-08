@@ -10,7 +10,7 @@ This is a pretty wide question, so let's try to decompose it:
 - To make it worse, every programming language AND build tool has a different way of consuming downstream dependencies.
 - Therefore there is not one common way to check the security of software that is being consumed.
 
-So the first (security) challenge that every developer faces nowadays is: how can I check the list of my (direct and transitive) dependencies against this database of CVEs?
+So the first (security) challenge that every developer faces nowadays is: how can I check the list of my (direct and transitive) dependencies against a public database of CVEs?
 
 The good news is that [NVD](https://nvd.nist.gov/) and other similar initiatives have built an important knowledge base containing known vulnerabilities (or CVEs) affecting many popular libraries.  
 
@@ -24,7 +24,7 @@ _Everytime that code is changed, security scanning should kick in_
 - If the change affects the _build descriptor_ (i.e. the list of downstream dependencies may have been updated), the list should be checked against the (public) list of CVEs. 
 - If that scan returns a negative response, the change ***must** be rejected.
 - To achieve such behaviour, [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) is mandatory.
-- If the change affects the rest of the code, SAST should kick in; _this part is still work in progress_.
+- If the change affects the rest of the code, a static code analysis should kick in; there are specific tools for this tasks, read more below.
 
 ### Proactive
 _A newly discovered CVE that is affecting a downstream library makes the current code vulnerable._
@@ -39,6 +39,7 @@ We've evaluated **a lot** of services and tools but for some reason or other it'
 - Support direct and transitive dependencies
 - Ability to suppress warnings and efficiently manage false positives.  Such suppressions MUST be part of the codebase and treated as an extremely important code
 - Ability to run such logic as part of CI/CD (GitHub actions)
+- A tool to run static code analysis, integrated with GitHub actions for continuous runs
 - Documentation that describes how to use the scanning and what to expect.
 
 ### Allowed lists
@@ -53,7 +54,7 @@ In this codebase you'll find a folder for each of the build platforms listed bel
 
 The documentation below will also provide the GitHub Actions code that will enable scanning without the need to update anything in your build descriptor files.
 
-## Node
+### Node
 The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs), which limits scope only to non dev dependencies by default.
 
 To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
@@ -93,7 +94,7 @@ Also create a `allow-list.json` file in the project root, check an example in th
 
 If you want to test it, add a dependency against `"chokidar" : "2.0.3"`(https://pypi.org/project/insecure-package/), re-run the `npx --yes auditjs ossi --whitelist allow-list.json` command mentioned in the GitHub Action above and expect the build to fail.
 
-## Python
+### Python
 For Python projects we recommend using the [`safety` library](https://pyup.io/safety/) library, which checks `requirements.txt` entries against NVD DB.
 
 To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
@@ -148,7 +149,7 @@ Make sure to create a `safety-policy.yml` file, which will define which errors/w
 
 If you want to test it, add a dependency against [`insecure-package`](https://pypi.org/project/insecure-package/), re-run the `safety check` command mentioned in the GitHub Action above and expect the build to fail.
 
-## Maven
+### Maven
 The maven project uses the [OWASP `dependency-check-maven`](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/) plugin to scan runtime dependencies for known vulnerabilities.
 
 To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
@@ -188,7 +189,7 @@ Make sure to create a `allow-list.xml` file, which will define which errors/warn
 
 If you prefer to integrate the Maven plugin in your `pom.xml`, checkout `maven/pom.xml` as example.
 
-## Gradle
+### Gradle
 The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html). Sadly, Gradle [doesn't allow to invoke plugins without altering the build manifest](https://discuss.gradle.org/t/invoking-tasks-provided-by-a-plugin-without-altering-the-build-file/27235), namely `build.gradle`; follow instructions below to know how to add security scanning in your project.
 
 The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
@@ -199,7 +200,7 @@ To enable the CVE scanning on your repository, follow these steps:
 3. Run `./gradlew dependencyCheckAnalyze` locally
 4. Copy `.github/workflows/gradle.yml` in your project and adapt it as you see fit
 
-## Scala
+### Scala
 The Scala project uses the [`sbt-dependency-check` plugin](https://github.com/albuch/sbt-dependency-check) to scan incoming dependencies for CVEs.
 
 The `build.sbt` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
@@ -209,3 +210,12 @@ To enable the CVE scanning on your repository, follow these steps:
 2. Copy the `sbt-dependency-check` plugin definition from `scala/project/plugins.sbt` into your project
 3. Run `sbt dependencyCheck` locally
 4. Copy `.github/workflows/scala.yml` in your project and adapt it as you see fit
+
+## Static code analysis
+To identify bugs in the *upstream* code, that is, code that is written and hosted in your own repository, there are several tools out there; the one that works well for us is https://semgrep.dev , and we designed a GitHub Action in `.github/workflows/semgrep.yml` that continuously runs scans on every code change.
+
+Semgrep supports a [long list of programming languages](https://semgrep.dev/docs/supported-languages/) and defines a [rich list of rulesets](https://semgrep.dev/explore) that tests the code against.
+
+In order to use it, you need to
+1. Sign up for free on https://semgrep.dev and generate a token
+2. Create a GitHub Secret called `SEMGREP_APP_TOKEN`, with the token earlier created as value
