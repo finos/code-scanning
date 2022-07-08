@@ -233,7 +233,7 @@ In order to use it, you need to
 6. Generate reports about security scanning usage: a private one, with details about code and repositories, for FINOS Staff use, and a public one, with anonymized data
 
 ## Contributing
-
+For any bug, question or enhancement request, please [create a GitHub Issue](https://github.com/finos/security-scanning/issues)
 1. Fork it (<https://github.com/finos/security-scanning/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Read our [contribution guidelines](.github/CONTRIBUTING.md) and [Community Code of Conduct](https://www.finos.org/code-of-conduct)
