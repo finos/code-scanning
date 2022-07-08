@@ -3,7 +3,8 @@ name: Scala CI
 on:
   push:
     paths:
-      - 'scala/**'
+      - 'scala/build.sbt'
+      - 'allow-list.xml'
       - '.github/workflows/scala.yml'
 
 jobs:

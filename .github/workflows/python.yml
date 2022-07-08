@@ -3,7 +3,8 @@ name: Poetry CI
 on:
   push:
     paths:
-      - 'python/**'
+      - 'python/pyproject.toml'
+      - 'python/safety-policy.yml'
       - '.github/workflows/python.yml'
 
 jobs:

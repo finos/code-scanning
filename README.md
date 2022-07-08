@@ -1,7 +1,6 @@
 # security-scanning
 
 ## The problem
-
 **How can we keep FINOS' hosted codebase secure?** 
 
 This is a pretty wide question, so let's try to decompose it:
@@ -20,7 +19,6 @@ The other 1% is code written by the developer.  This code can contain vulnerabil
 At [FINOS](finos.org), we always strive to improve the security of our hosted code.  Right now, we're moving in 2 main directions:
 
 ### Reactive
-
 _Everytime that code is changed, security scanning should kick in_
 
 - If the change affects the _build descriptor_ (i.e. the list of downstream dependencies may have been updated), the list should be checked against the (public) list of CVEs. 
@@ -29,13 +27,11 @@ _Everytime that code is changed, security scanning should kick in_
 - If the change affects the rest of the code, SAST should kick in; _this part is still work in progress_.
 
 ### Proactive
-
 _A newly discovered CVE that is affecting a downstream library makes the current code vulnerable._
 
 It is very important to notify developers quickly and privately, to prevent malicious actors from taking advantage of the vulnerability. This can be easily achieved by running the same reactive scan **on a schedule**, for example daily (see examples below).
 
 ## The solution
-
 We've evaluated **a lot** of services and tools but for some reason or other it's extremely hard to find one solution that ticks all the boxes. This is why we decided to create this repository.  FINOS Security Scanning sets a baseline for the security scanning that our hosted projects need:
 
 - 5 supported build platforms - maven, gradle, python (and poetry), scala and node.
@@ -45,12 +41,10 @@ We've evaluated **a lot** of services and tools but for some reason or other it'
 - Ability to run such logic as part of CI/CD (GitHub actions)
 - Documentation that describes how to use the scanning and what to expect.
 
-### Suppression
-
+### Allowed lists
 It's worth emphatizing the importance of warning/error suppression; one of the reasons CVE scanning isn't mainstream is that developers _constantly seek productivity_. Often, vulnerability reporting is seen as a distraction rather than a benfit. Delivering an efficient scanning tool _without false positives_ is key to keeping developers happy and making sure they use the tools.
 
 ## Code Layout
-
 In this codebase you'll find a folder for each of the build platforms listed below. Each folder includes a "Hello World" project, with a build descriptor that:
 
 1. Pulls in a CVE
@@ -60,7 +54,6 @@ In this codebase you'll find a folder for each of the build platforms listed bel
 The documentation below will also provide the GitHub Actions code that will enable scanning without the need to update anything in your build descriptor files.
 
 ## Node
-
 The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs), which limits scope only to non dev dependencies by default.
 
 To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
@@ -156,7 +149,6 @@ Make sure to create a `safety-policy.yml` file, which will define which errors/w
 If you want to test it, add a dependency against [`insecure-package`](https://pypi.org/project/insecure-package/), re-run the `safety check` command mentioned in the GitHub Action above and expect the build to fail.
 
 ## Maven
-
 The maven project uses the [OWASP `dependency-check-maven`](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/) plugin to scan runtime dependencies for known vulnerabilities.
 
 To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
@@ -197,17 +189,23 @@ Make sure to create a `allow-list.xml` file, which will define which errors/warn
 If you prefer to integrate the Maven plugin in your `pom.xml`, checkout `maven/pom.xml` as example.
 
 ## Gradle
-
-The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html). Sadly, Gradle [doesn't allow to invoke plugins without altering the build manifest](https://discuss.gradle.org/t/invoking-tasks-provided-by-a-plugin-without-altering-the-build-file/27235), namely `build.gradle`, but changes are quite basic, so please keep reading.
+The Gradle build uses the [Dependency Check plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html). Sadly, Gradle [doesn't allow to invoke plugins without altering the build manifest](https://discuss.gradle.org/t/invoking-tasks-provided-by-a-plugin-without-altering-the-build-file/27235), namely `build.gradle`; follow instructions below to know how to add security scanning in your project.
 
 The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
 
-Run `./gradlew dependencyCheckAnalyze` to run the CVE scan; check `gradle/build.gradle` and `.github/workflows/gradle.yml` for more info.
+To enable the CVE scanning on your repository, follow these steps:
+1. Copy the `dependencyCheck` setup from `gradle/build.gradle` file
+2. Copy `allow-list.xml` file into your repository and remove all `<suppress>` entries
+3. Run `./gradlew dependencyCheckAnalyze` locally
+4. Copy `.github/workflows/gradle.yml` in your project and adapt it as you see fit
 
 ## Scala
-
 The Scala project uses the [`sbt-dependency-check` plugin](https://github.com/albuch/sbt-dependency-check) to scan incoming dependencies for CVEs.
 
 The `build.sbt` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
 
-Simply run `sbt dependencyCheck` to run the CVE scan; check `scala/build.sbt` folder and `.github/workflows/scala.yml` for more info.
+To enable the CVE scanning on your repository, follow these steps:
+1. Copy `dependencyCheckFailBuildOnCVSS` and `dependencyCheckSuppressionFiles` configurations from `scala/build.sbt` file in your project
+2. Copy the `sbt-dependency-check` plugin definition from `scala/project/plugins.sbt` into your project
+3. Run `sbt dependencyCheck` locally
+4. Copy `.github/workflows/scala.yml` in your project and adapt it as you see fit

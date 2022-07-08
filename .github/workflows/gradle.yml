@@ -3,7 +3,8 @@ name: Gradle CI
 on:
   push:
     paths:
-      - 'gradle/**'
+      - 'gradle/build.gradle'
+      - 'allow-list.xml'
       - '.github/workflows/gradle.yml'
 
 jobs:

@@ -3,7 +3,8 @@ name: Maven CI
 on:
   push:
     paths:
-      - 'maven/**'
+      - 'maven/pom.xml'
+      - 'allow-list.xml'
       - '.github/workflows/maven.yml'
 
 jobs:
