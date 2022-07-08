@@ -1,0 +1,7 @@
+SPDXVersion: SPDX-2.0
+DataLicense: CC0-1.0
+Creator: Maurizio Pillitu (FINOS)
+PackageName: FINOS Security Scanning
+PackageOriginator: FINOS
+PackageHomePage: https://github.com/finos/security-scanning
+PackageLicenseDeclared: Apache-2.0
