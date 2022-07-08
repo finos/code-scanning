@@ -64,6 +64,7 @@ def create():
 @bp.route('/<int:post_id>/something/<string:title>', methods=('GET', 'POST'))
 def vuln(post_id, title):
     db = get_db()
+    # nosemgrep
     db.execute( 'UPDATE post SET title = "'+title+'" WHERE id = '+post_id)
     return redirect(url_for('blog.index'))
 
