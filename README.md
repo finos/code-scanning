@@ -216,6 +216,10 @@ To identify bugs in the *upstream* code, that is, code that is written and hoste
 
 Semgrep supports a [long list of programming languages](https://semgrep.dev/docs/supported-languages/) and defines a [rich list of rulesets](https://semgrep.dev/explore) that tests the code against.
 
+It also provides ways to [ignore false positives](https://semgrep.dev/docs/ignoring-files-folders-code/) by:
+1. adding a `//nosemgrep` (or `#nosemgrep`) comment on top of the code block that causes the error
+2. adding a `.semgrepignore` file with a list of file names that should be ignored during the scan
+
 In order to use it, you need to
 1. Sign up for free on https://semgrep.dev and generate a token
 2. Create a GitHub Secret called `SEMGREP_APP_TOKEN`, with the token earlier created as value
