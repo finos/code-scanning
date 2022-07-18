@@ -20,6 +20,7 @@ scala/.worksheet
 scala/**/target
 scala/target
 scala/boot
+mill/out
 
 # Others
 .classpath
