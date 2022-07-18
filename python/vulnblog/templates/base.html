@@ -1,14 +1,18 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} - Vulnblog</title>
+<!-- nosemgrep -->
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
     <h1><a href='/'>Vulnblog</a></h1>
     <ul>
         {% if g.user %}
             <li><span>{{ g.user['username'] }}</span>
+            <!-- nosemgrep -->
             <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
                 {% else %}
+            <!-- nosemgrep -->
             <li><a href="{{ url_for('auth.register') }}">Register</a>
+            <!-- nosemgrep -->
             <li><a href="{{ url_for('auth.login') }}">Log In</a>
         {% endif %}
     </ul>
