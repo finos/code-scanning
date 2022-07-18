@@ -8,7 +8,7 @@ on:
       - '.github/workflows/python.yml'
 
 jobs:
-  test:
+  scan:
     name: Build and test App
     runs-on: ubuntu-latest
     strategy:

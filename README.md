@@ -34,7 +34,7 @@ It is very important to notify developers quickly and privately, to prevent mali
 ## The solution
 We've evaluated **a lot** of services and tools but for some reason or other it's extremely hard to find one solution that ticks all the boxes. This is why we decided to create this repository.  FINOS Security Scanning sets a baseline for the security scanning that our hosted projects need:
 
-- 5 supported build platforms - maven, gradle, python (and poetry), scala and node.
+- 6 supported build platforms - Maven, Gradle, Python (and Poetry), Scala (with SBT), NodeJS and Rust
 - A common approach to CVE scanning mechanism, which only examines runtime dependencies (anything else is - for now - out of scope).
 - Support direct and transitive dependencies
 - Ability to suppress warnings and efficiently manage false positives.  Such suppressions MUST be part of the codebase and treated as an extremely important code
@@ -54,7 +54,7 @@ In this codebase you'll find a folder for each of the build platforms listed bel
 
 The documentation below will also provide the GitHub Actions code that will enable scanning without the need to update anything in your build descriptor files.
 
-### Node
+### NodeJS
 The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs), which limits scope only to non dev dependencies by default.
 
 To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
@@ -200,7 +200,7 @@ To enable the CVE scanning on your repository, follow these steps:
 3. Run `./gradlew dependencyCheckAnalyze` locally
 4. Copy `.github/workflows/gradle.yml` in your project and adapt it as you see fit
 
-### Scala
+### Scala (with SBT)
 The Scala project uses the [`sbt-dependency-check` plugin](https://github.com/albuch/sbt-dependency-check) to scan incoming dependencies for CVEs.
 
 The `build.sbt` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
@@ -210,6 +210,13 @@ To enable the CVE scanning on your repository, follow these steps:
 2. Copy the `sbt-dependency-check` plugin definition from `scala/project/plugins.sbt` into your project
 3. Run `sbt dependencyCheck` locally
 4. Copy `.github/workflows/scala.yml` in your project and adapt it as you see fit
+
+### Rust
+The Rust project uses [Cargo audit](https://crates.io/crates/cargo-audit) to run CVE scans across dependencies defined in `Cargo.toml`:
+1. `cargo install --force cargo-audit` - to install Cargo audit
+2. `cargo audit` - to run the scan ; you can append `--ignore RUSTSEC-2020-0071` in order to ignore false positives
+
+For more information about Cargo audit configuration, visit [https://docs.rs/cargo-audit/0.17.0/cargo_audit/config/index.html](https://docs.rs/cargo-audit/0.17.0/cargo_audit/config/index.html)
 
 ## Static code analysis
 To identify bugs in the *upstream* code, that is, code that is written and hosted in your own repository, there are several tools out there; the one that works well for us is https://semgrep.dev , and we designed a GitHub Action in `.github/workflows/semgrep.yml` that continuously runs scans on every code change.

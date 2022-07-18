@@ -8,7 +8,7 @@ on:
       - '.github/workflows/scala.yml'
 
 jobs:
-  test:
+  scan:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout

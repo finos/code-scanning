@@ -20,6 +20,7 @@ scala/.worksheet
 scala/**/target
 scala/target
 scala/boot
+rust/target
 
 # Others
 .classpath
