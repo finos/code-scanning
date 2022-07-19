@@ -211,6 +211,8 @@ To enable the CVE scanning on your repository, follow these steps:
 3. Run `sbt dependencyCheck` locally
 4. Copy `.github/workflows/scala.yml` in your project and adapt it as you see fit
 
+To keep your library dependencies, sbt plugins, and Scala and sbt versions up-to-date, checkout [Scala Steward](https://github.com/scala-steward-org/scala-steward).
+
 ### Rust
 The Rust project uses [Cargo audit](https://crates.io/crates/cargo-audit) to run CVE scans across dependencies defined in `Cargo.toml`:
 1. `cargo install --force cargo-audit` - to install Cargo audit
