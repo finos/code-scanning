@@ -220,6 +220,11 @@ The Rust project uses [Cargo audit](https://crates.io/crates/cargo-audit) to run
 
 For more information about Cargo audit configuration, visit [https://docs.rs/cargo-audit/0.17.0/cargo_audit/config/index.html](https://docs.rs/cargo-audit/0.17.0/cargo_audit/config/index.html)
 
+### Other languages and build platforms
+If your project is built using other languages or build platforms, checkout the [list of analyzers](https://jeremylong.github.io/DependencyCheck/analyzers/index.html) offered by the OWASP Dependency Check plugin.
+
+There is also a [GitHub Dependency Check Action](https://github.com/dependency-check/Dependency-Check_Action) that uses a [nightly build of the CVE database](https://hub.docker.com/r/owasp/dependency-check-action), along with the Dependency check plugin.
+
 ## Static code analysis
 To identify bugs in the *upstream* code, that is, code that is written and hosted in your own repository, there are several tools out there; the one that works well for us is https://semgrep.dev , and we designed a GitHub Action in `.github/workflows/semgrep.yml` that continuously runs scans on every code change.
 
