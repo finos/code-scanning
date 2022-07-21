@@ -31,22 +31,25 @@
        
     <build>
         <plugins>
-            <plugin>
-            <groupId>org.owasp</groupId>
-            <artifactId>dependency-check-maven</artifactId>
-            <version>7.1.1</version>
-            <configuration>
-                <failBuildOnCVSS>7</failBuildOnCVSS>
-                <suppressionFile>../allow-list.xml</suppressionFile>
-            </configuration>            
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>check</goal>
-                    </goals>
-                </execution>
-            </executions>
-            </plugin>
+            <!-- 
+                Use the syntax below to integrate the check into the default maven lifecycle
+            -->
+            <!-- <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>7.1.1</version>
+                <configuration>
+                    <failBuildOnCVSS>7</failBuildOnCVSS>
+                    <suppressionFile>../allow-list.xml</suppressionFile>
+                </configuration>            
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>

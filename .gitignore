@@ -27,3 +27,6 @@ rust/target
 .project
 .settings/
 .vscode
+
+dependency-check-report.*
+dependency-check-junit.xml
