@@ -18,6 +18,7 @@ fi
 # Make sure we are using the latest version
 docker pull owasp/dependency-check:$DC_VERSION
 
+# nosemgrep
 docker run --rm \
     -e user=$USER \
     -u $(id -u ${USER}):$(id -g ${USER}) \
