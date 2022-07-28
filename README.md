@@ -240,6 +240,13 @@ In order to use it, you need to
 2. Create a GitHub Secret called `SEMGREP_APP_TOKEN`, with the token earlier created as value
 3. Run `semgrep scan --error --config auto`
 
+In order to test it locally, make sure to:
+1. [Install Semgrep](https://semgrep.dev/docs/getting-started/)
+2. Signup to [semgrep.dev](semgrep.dev)
+3. Generate a token, using the `Settings` menu option
+4. `export SEMGREP_APP_TOKEN=<your personal semgrep token>`
+5. Run `semgrep scan --error --config auto` from the root folder
+
 ## Roadmap
 1. Add documentation into [community.finos.org](community.finos.org)
 2. Publish post on FINOS blog
