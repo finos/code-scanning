@@ -87,6 +87,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - run: npm install
       - run: npx --yes auditjs ossi --whitelist allow-list.json
 ```
 
