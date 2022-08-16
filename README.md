@@ -98,7 +98,10 @@ If you want to test it, add a dependency against `"chokidar" : "2.0.3"`(https://
 ### Python
 For Python projects we recommend using the [`safety` library](https://pyup.io/safety/) library, which checks `requirements.txt` entries against NVD DB.
 
-To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
+To enable the CVE scanning on your repository, follow these simple steps:
+
+1. Create a `safety-policy.yml` file in your project's root folder, which will define which errors/warnings to suppress as false positives; you can find an example [in the python folder](https://github.com/maoo/security-scanning/blob/main/python/safety-policy.yml)
+2. Create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
 
 ```
 name: Python CVE Scanning
@@ -145,8 +148,6 @@ If you are using [Poetry](https://python-poetry.org/), add the following steps b
       - name: Export requirements.txt from poetry
         run: poetry export --without-hashes -f requirements.txt > requirements.txt
 ```
-
-Make sure to create a `safety-policy.yml` file, which will define which errors/warnings to suppress as false positives; you can find a sample file in the `python` subfolder.
 
 If you want to test it, add a dependency against [`insecure-package`](https://pypi.org/project/insecure-package/), re-run the `safety check` command mentioned in the GitHub Action above and expect the build to fail.
 
@@ -237,7 +238,7 @@ It also provides ways to [ignore false positives](https://semgrep.dev/docs/ignor
 
 In order to use it, you need to
 1. Sign up for free on https://semgrep.dev and generate a token
-2. Create a GitHub Secret called `SEMGREP_APP_TOKEN`, with the token earlier created as value
+2. Create a GitHub Secret called `SEMGREP_APP_TOKEN`, with the token earlier created as value. If you want to enable scanning on a FINOS hosted repository, please email [help@finos.org](mailto:help@finos.org) and they will take care of setting the `SEMGREP_APP_TOKEN` secret on the GitHub repository.
 3. Run `semgrep scan --error --config auto`
 
 In order to test it locally, make sure to:
