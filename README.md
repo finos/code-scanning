@@ -187,7 +187,7 @@ jobs:
         run: mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=7 -DsuppressionFile="allow-list.xml"
 ```
 
-Make sure to create a `allow-list.xml` file, which will define which errors/warnings to suppress as false positives; you can find a sample file in the `maven` subfolder.
+Make sure to create a `allow-list.xml` file, which will define which errors/warnings to suppress as false positives; you can find a sample file in the root of this project.
 
 If you prefer to integrate the Maven plugin in your `pom.xml`, checkout `maven/pom.xml` as example.
 
