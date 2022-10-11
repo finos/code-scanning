@@ -15,5 +15,4 @@ jobs:
         with:
           toolchain: stable
       - run: cargo install --force cargo-audit
-      - run: cargo generate-lockfile
       - run: cargo audit --ignore RUSTSEC-2020-0071 --ignore RUSTSEC-2020-0159
