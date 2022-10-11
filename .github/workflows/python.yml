@@ -7,20 +7,19 @@ on:
       - 'python/safety-policy.yml'
       - '.github/workflows/python.yml'
 
+env:
+  PYTHON_KEYRING_BACKEND: keyring.backends.null.Keyring
+
 jobs:
   scan:
     name: Build and test App
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python }}
-      - name: Run Poetry image
-        uses: abatilo/actions-poetry@v2
+          python-version: "3.10"
+      - uses: abatilo/actions-poetry@v2
         with:
           poetry-version: "1.2.2"
       - name: View poetry --help
