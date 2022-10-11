@@ -1,5 +1,14 @@
 # FINOS Security Scanning
 
+[![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
+[![Gradle CI](https://github.com/finos/security-scanning/actions/workflows/gradle.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/gradle.yml)
+[![Maven CI](https://github.com/finos/security-scanning/actions/workflows/maven.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/maven.yml)
+[![Node.js CI](https://github.com/finos/security-scanning/actions/workflows/node.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/node.yml)
+[![Poetry CI](https://github.com/finos/security-scanning/actions/workflows/python.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/python.yml)
+[![Rust CI](https://github.com/finos/security-scanning/actions/workflows/rust.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/rust.yml)
+[![Scala CI](https://github.com/finos/security-scanning/actions/workflows/scala.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/scala.yml)
+[![Static code analysis](https://github.com/finos/security-scanning/actions/workflows/semgrep.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/semgrep.yml)
+
 ## The problem
 **How can we keep FINOS' hosted codebase secure?** 
 
