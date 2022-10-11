@@ -19,9 +19,15 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python }}
-      - name: Install poetry
-        run: pip install poetry
-        working-directory: python
+      - name: Run Poetry image
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: "3.10"
+      - name: View poetry --help
+        run: poetry --help
+      # - name: Install poetry
+      #   run: pip install poetry
+      #   working-directory: python
       - name: Build app
         run: poetry build
         working-directory: python
