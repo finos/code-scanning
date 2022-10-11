@@ -14,5 +14,4 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run:
-        - cargo install --force cargo-audit ; cargo audit --ignore RUSTSEC-2020-0071
+      - run: cargo install --force cargo-audit ; cargo audit --ignore RUSTSEC-2020-0071
