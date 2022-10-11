@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "Security Comparison",
     "main": "index.js",
-    "author": "Maurizio Pillitu <maoo@finos.org> (https://www.finos.org)",
+    "author": "FINOS <info@finos.org> (https://www.finos.org)",
     "license": "Apache-2.0",
     "scripts" : {
         "scan-cves" : "npx --yes auditjs ossi --whitelist allow-list.json"

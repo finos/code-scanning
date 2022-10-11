@@ -100,7 +100,7 @@ For Python projects we recommend using the [`safety` library](https://pyup.io/sa
 
 To enable the CVE scanning on your repository, follow these simple steps:
 
-1. Create a `safety-policy.yml` file in your project's root folder, which will define which errors/warnings to suppress as false positives; you can find an example [in the python folder](https://github.com/maoo/security-scanning/blob/main/python/safety-policy.yml)
+1. Create a `safety-policy.yml` file in your project's root folder, which will define which errors/warnings to suppress as false positives; you can find an example [in the python folder](https://github.com/finos/security-scanning/blob/main/python/safety-policy.yml)
 2. Create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
 
 ```

@@ -2,7 +2,7 @@
 
 name = "hello_world"
 version = "0.0.1"
-authors = [ "Maurizio Pillitu <maoo@finos.org>" ]
+authors = [ "FINOS <info@finos.org>" ]
 
 [dependencies]
 chrono = "0.4.19"

@@ -3,7 +3,7 @@ name = "helloworld"
 version = "0.1.0"
 description = "Just a sample project"
 homepage = "https://github.com/finos"
-authors = ["Maurizio Pillitu <maoo@finos.org>"]
+authors = ["FINOS <info@finos.org>"]
 license = "Apache-2.0"
 classifiers = [
     "Development Status :: 4 - Beta",
