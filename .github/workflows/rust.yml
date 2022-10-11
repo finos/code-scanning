@@ -16,3 +16,4 @@ jobs:
           toolchain: stable
       - run: cargo install --force cargo-audit
       - run: cargo audit --ignore RUSTSEC-2020-0071 --ignore RUSTSEC-2020-0159
+        working-directory: rust
