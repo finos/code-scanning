@@ -44,110 +44,57 @@ Based on the requirements discussed above, we tried to consolidate a list of tec
 It's worth emphasizing the importance of having a mechanism for ignoring warnings and errors, which may well be false positives.  Without it, developers will eventually disable any security tool. And it’s important to store it in the codebase so that changes can be easily done by developers using the Git collaboration workflow.
 
 ## Code Layout
-In this codebase you'll find a folder for each of the build platforms listed below. Each folder includes a "Hello World" project, with a build descriptor that:
+
+In this codebase you'll find a folder for each of the build platforms listed below. Each folder includes a `Hello World` project, with a build descriptor that:
 
 1. Pulls in a CVE
 2. Configures a CVE scanning tool that is specific to the build tool
-3. Defines a suppression file that ignores the error caused by the CVE
+3. Defines a list of ignored warnings/errors caused by the CVE scanning
 
-The documentation below will also provide the GitHub Actions code that will enable scanning without the need to update anything in your build descriptor files.
+In the `.github/workflows` folder you'll find a GitHub Action for each of these projects, that you can simply copy and paste into your GitHub repository.
+
+## Using FINOS CVE scanning in your project
+
+1. Identify the language(s) and build system(s) used in the repository you want to scan.
+2. Checkout your repository locally.
+3. Find - from the list below - which sections applies to you.
+4. Follow the instructions to run the scan locally, make sure that the scan runs successfully and generates a list of CVEs.
+5. Investigate CVEs, one by one; the majority of CVEs can be addressed by updating a given library to a newer version; in some cases, you'll find out that you're using a certain library in an unsecure way; in some other cases, you may stumble on false positives (that is, a CVE that doesn't apply to your codebase) and therefore you'd have to ignore the error by updating the ignore list file.
+6. Copy the related GitHub Action (in `.github/workflows`) into your project; make sure to call them `cve-scanning.yml`, so that FINOS monitoring tools can find easily find it.
+7. Push the changes to GitHub and checkout the Github Action run and output.
+8. From the GitHub `Actions` tab, you can select the `CVE Scanning` action and `Create status badge`, which will allow you to copy Markdown code for your `README.md` file that shows a badge with the result of the last action run; this is quite useful for consumers to see that code is scanned and that no CVEs were spotted in the main codebase branch.
+
+## Supported languages
 
 ### NodeJS
-The NodeJS project uses [AuditJS](https://www.npmjs.com/package/auditjs), which limits scope only to non dev dependencies by default.
 
-To enable the CVE scanning on your repository, simply create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
+The NodeJS sample project uses [AuditJS](https://www.npmjs.com/package/auditjs), a library built by Sonatype which provides a very good alternative to `npm audit`; you can read more about their comparison on https://blog.sonatype.com/compare-npm-audit-versus-auditjs .
 
-```
-name: Node.js CVE Scanning
+The [project descriptor](https://github.com/finos/security-scanning/blob/readme-improvement/node/package.json) pulls the `chokidar 2.0.3` dependency, which contains some CVEs that are ignored into the list of ignored errors.
 
-on:
-  pull_request:
-    paths:
-      - 'package.json'
-      - '.github/workflows/cve-scanning.yml'
-  push:
-    paths:
-      - 'package.json'
-      - '.github/workflows/cve-scanning.yml'
-    schedule:
-      # Run every day at 5am and 5pm
-      - cron: '0 5,17 * * *'
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install --prod
-      - run: npx --yes auditjs ossi --whitelist allow-list.json
-```
-
-Also create a `allow-list.json` file in the project root, check an example in the `node` folder.
-
-If you want to test it, add a dependency against `"chokidar" : "2.0.3"`(https://pypi.org/project/insecure-package/), re-run the `npx --yes auditjs ossi --whitelist allow-list.json` command mentioned in the GitHub Action above and expect the build to fail.
+To run AuditJS locally, follow these steps, from the folder containing the `package.json` project descriptor ; note that a project may contain more than one descriptor, and this action should be executed for all of them.
+1. Cleanup the codebase from previous runs - `rm -rf node_modules package-lock.json yarn.lock`
+2. Install (only runtime) dependencies - `npm install --prod`
+3. Run AuditJS - `npx --yes auditjs ossi`
+4. If you want to ignore errors, create an [allow-list.json](node/allow-list.json) file and append ` --whitelist allow-list.json` to the command on step 3
 
 ### Python
-For Python projects we recommend using the [`safety` library](https://pyup.io/safety/) library, which checks `requirements.txt` entries against NVD DB.
 
-To enable the CVE scanning on your repository, follow these simple steps:
+For Python sample project uses the [`safety` library](https://pyup.io/safety/), which checks `requirements.txt` entries against the [NVD database](https://nvd.nist.gov/).
 
-1. Create a `safety-policy.yml` file in your project's root folder, which will define which errors/warnings to suppress as false positives; you can find an example [in the python folder](https://github.com/finos/security-scanning/blob/main/python/safety-policy.yml)
-2. Create a new file called `.github/workflows/cve-scanning.yml` and paste this content:
+The python sample project defines a dependency on [`insecure-package`](https://pypi.org/project/insecure-package/), which pulls a CVE that is ignored in the `safety-policy.yml`, in order to demo how to manage false positives.
 
+To run safety locally, follow these steps:
+1. Make sure you're running Python 3.x using `python --version`, otherwise the version of `safety` that you're able to use would be quite outdated
+2. Install safety with `pip install safety`
+3. Run safety with `safety check --full-report -r requirements.txt`
+4. If you want to ignore errors, create a `safety-policy.yml` and append ` --policy-file safety-policy.yml` to the command on step 3
+
+If you're using [Poetry](https://python-poetry.org/), you can simply export your libaries into a `requirements.txt` file and then follow the steps above, using:
 ```
-name: Python CVE Scanning
-
-on:
-  pull_request:
-    paths:
-      - 'pyproject.toml'
-      - '.github/workflows/cve-scanning.yml'
-  push:
-    paths:
-      - 'pyproject.toml'
-      - '.github/workflows/cve-scanning.yml'
-    schedule:
-      # Run every day at 5am and 5pm
-      - cron: '0 5,17 * * *'
-
-jobs:
-  ci:
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10"]
-        poetry-version: ["1.1.11"]
-        os: [ubuntu-18.04]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install safety
-        run: pip3 install safety
-      - name: Run safety check
-        run: safety check --full-report -r requirements.txt --policy-file safety-policy.yml
+poetry install
+poetry export --without-hashes -f requirements.txt --output requirements.txt
 ```
-
-If you are using [Poetry](https://python-poetry.org/), add the following steps before the `Install safety` block:
-```
-      - name: Run image
-        uses: abatilo/actions-poetry@v2.0.0
-        with:
-          poetry-version: ${{ matrix.poetry-version }}
-      - name: Export requirements.txt from poetry
-        run: poetry export --without-hashes -f requirements.txt > requirements.txt
-```
-
-If you want to test it, add a dependency against [`insecure-package`](https://pypi.org/project/insecure-package/), re-run the `safety check` command mentioned in the GitHub Action above and expect the build to fail.
 
 ### Maven
 The maven project uses the [OWASP `dependency-check-maven`](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/) plugin to scan runtime dependencies for known vulnerabilities.
