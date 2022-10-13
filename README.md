@@ -61,8 +61,8 @@ In the `.github/workflows` folder you'll find a GitHub Action for each of these 
 4. Follow the instructions to run the scan locally, make sure that the scan runs successfully and generates a list of CVEs.
 5. Investigate CVEs, one by one; the majority of CVEs can be addressed by updating a given library to a newer version; in some cases, you'll find out that you're using a certain library in an unsecure way; in some other cases, you may stumble on false positives (that is, a CVE that doesn't apply to your codebase) and therefore you'd have to ignore the error by updating the ignore list file.
 6. Copy the related GitHub Action (in `.github/workflows`) into your project; make sure to call them `cve-scanning.yml`, so that FINOS monitoring tools can find easily find it.
-7. Push the changes to GitHub and checkout the Github Action run and output.
-8. From the GitHub `Actions` tab, you can select the `CVE Scanning` action and `Create status badge`, which will allow you to copy Markdown code for your `README.md` file that shows a badge with the result of the last action run; this is quite useful for consumers to see that code is scanned and that no CVEs were spotted in the main codebase branch.
+7. From the GitHub `Actions` tab, you can select the `CVE Scanning` action and `Create status badge`, which will allow you to copy Markdown code for your `README.md` file that shows a badge with the result of the last action run; this is quite useful for consumers to see that code is scanned and that no CVEs were spotted in the main codebase branch.
+8. Push the changes to GitHub and checkout the Github Action run and output.
 
 ## Supported languages
 
