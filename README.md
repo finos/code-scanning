@@ -43,7 +43,7 @@ Based on the requirements discussed above, we tried to consolidate a list of tec
 
 It's worth emphasizing the importance of having a mechanism for ignoring warnings and errors, which may well be false positives.  Without it, developers will eventually disable any security tool. And it’s important to store it in the codebase so that changes can be easily done by developers using the Git collaboration workflow.
 
-## Code Layout
+## Project Layout
 
 In this codebase you'll find a folder for each of the build platforms listed below. Each folder includes a `Hello World` project, with a build descriptor that:
 
@@ -51,7 +51,10 @@ In this codebase you'll find a folder for each of the build platforms listed bel
 2. Configures a CVE scanning tool that is specific to the build tool
 3. Defines a list of ignored warnings/errors caused by the CVE scanning
 
-In the `.github/workflows` folder you'll find a GitHub Action for each of these projects, that you can simply copy and paste into your GitHub repository.
+In the `.github/workflows` folder you'll find a GitHub Action for each of these projects, that you can simply copy/paste into your GitHub repository and edit to align to your project layout:
+- Update the name of the GitHub Action file to `cve-scanning.yml` (and `semgrep.yml`), which allows FINOS to monitor which projects are/aren't adopting the tool; the file name is also reflected in the `on: / push: / path:` section of the action
+- If the build files are located in the root project folder, remove all `working-directory` configurations
+- Adapt runtime versions (ie Node, Python, JVM, etc) with the ones used in your projects
 
 ## Using FINOS CVE scanning in your project
 
@@ -79,7 +82,7 @@ To run `AuditJS` locally:
 4. Run AuditJS - `npx --yes auditjs ossi`
 5. If you want to ignore errors, create an [allow-list.json](node/allow-list.json) file and append ` --whitelist allow-list.json` to the command on step 4
 
-The GitHub action can be copied from [here](.github/workflows/node.yml) into your repo under `.github/workflows/cve-scanning.yml`.
+The GitHub action can be copied from [here](.github/workflows/node.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 ### Python
 
@@ -100,7 +103,7 @@ poetry install
 poetry export --without-hashes -f requirements.txt --output requirements.txt
 ```
 
-The GitHub action can be copied from [here](.github/workflows/python.yml) into your repo under `.github/workflows/cve-scanning.yml`.
+The GitHub action can be copied from [here](.github/workflows/python.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 ### Maven
 
@@ -111,7 +114,7 @@ To run the `Maven Dependency Check Plugin` locally:
 2. Run `mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=7`
 3. If you want to ignore errors, create an [allow-list.xml](allow-list.xml) and append ` -DsuppressionFile="allow-list.xml"` to the command on step 2
 
-The GitHub action can be copied from [here](.github/workflows/maven.yml) into your repo under `.github/workflows/cve-scanning.yml`.
+The GitHub action can be copied from [here](.github/workflows/maven.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 ### Gradle
 
@@ -125,7 +128,7 @@ To run the `Gradle Dependency Check Plugin` locally:
 
 The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the (famous) [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
 
-The GitHub action can be copied from [here](.github/workflows/gradle.yml) into your repo under `.github/workflows/cve-scanning.yml`.
+The GitHub action can be copied from [here](.github/workflows/gradle.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 ### Scala (with SBT)
 
@@ -139,7 +142,7 @@ To run the `Scala Dependency Check Plugin` locally:
 
 The `build.sbt` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the (famous) [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
 
-The GitHub action can be copied from [here](.github/workflows/scala.yml) into your repo under `.github/workflows/cve-scanning.yml`.
+The GitHub action can be copied from [here](.github/workflows/scala.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 To keep your library dependencies, sbt plugins, and Scala and sbt versions up-to-date, checkout [Scala Steward](https://github.com/scala-steward-org/scala-steward).
 
@@ -153,7 +156,7 @@ To run `Cargo Audit` locally:
 3. Run the scan with `cargo audit`
 4. Append `--ignore RUSTSEC-2020-0071` to the command on step 3
 
-The GitHub action can be copied from [here](.github/workflows/rust.yml) into your repo under `.github/workflows/cve-scanning.yml`.
+The GitHub action can be copied from [here](.github/workflows/rust.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 For more information about Cargo audit configuration, visit [https://docs.rs/cargo-audit/0.17.0/cargo_audit/config/index.html](https://docs.rs/cargo-audit/0.17.0/cargo_audit/config/index.html)
 
