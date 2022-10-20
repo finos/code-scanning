@@ -5,4 +5,4 @@ version = "0.0.1"
 authors = [ "FINOS <info@finos.org>" ]
 
 [dependencies]
-chrono = "0.4.19"
+chrono = "0.4.22"
