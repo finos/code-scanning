@@ -166,6 +166,22 @@ If your project is built using other languages or build platforms, checkout the 
 
 There is also a [GitHub Dependency Check Action](https://github.com/dependency-check/Dependency-Check_Action) that uses a [nightly build of the CVE database](https://hub.docker.com/r/owasp/dependency-check-action), along with the Dependency check plugin.
 
+## Dependency update tool
+
+Keeping dependency versions up to date is a hard task, given the big amount of downstream libraries used by today's software projects and their frequent release cadence; adopting a tool to automate it can drastically save time for developers.
+
+Github ships with Dependabot, which can be easily enabled on every repository, but we found [Renovate](https://www.mend.io/free-developer-tools/renovate/) to be easier and more powerful to use, you can read [this comparison article](https://blog.frankel.ch/renovate-alternative-dependabot/), if you're interested.
+
+Assuming that Renovate is running on your project, the CVE scanning tools mentioned above would generate way less alerts, making it easier to manage project's security; as a result, we strongly advise to enable Renovate first, then add CVE scanning tools.
+
+In order to enable Renovate:
+1. Email help@finos.org and request enabling the Github App on your FINOS repositories
+2. Merge the Pull Request that gets generated after step 1
+
+Renovate will create a GitHub issue (titled `Renovate Dashboard`) with the recap of the actions that it will take and a one Pull Request for each depdendency version update; please note that:
+- The list of Pull Requests sent daily is limited to 10.
+- In order to ignore an update, simply close its related Pull Request; Renovate won't ask for the update anymore, unless requested via the `Renovate Dashboard` issue.
+
 ## Static code analysis
 To identify bugs in the hosted source code, that is, code that is written and hosted in your own repository, there are several tools out there; the one that proved to work well for us is https://semgrep.dev , and we designed a GitHub Action in `.github/workflows/semgrep.yml` that continuously scans the code upon every change.
 
