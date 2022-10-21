@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'node/package.json'
+      - 'node/package-lock.json'
       - 'node/allow-list.json'
       - '.github/workflows/node.yml'
 
