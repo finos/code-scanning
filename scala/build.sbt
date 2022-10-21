@@ -5,7 +5,7 @@ lazy val root = (project in file(".")).
       val _ = (g8Test in Test).toTask("").value
     },
     // Introduces a CVE, leading to a potential build fail
-    libraryDependencies += "org.apache.struts" % "struts2-core" % "2.3.8",
+    libraryDependencies += "org.apache.struts" % "struts2-core" % "6.0.3",
     dependencyCheckFailBuildOnCVSS := 5,
     // Add a suppression file, to test false positive suppression
     dependencyCheckSuppressionFiles ++= List(file("../allow-list.xml")),
