@@ -27,6 +27,6 @@
         "parse-github-url": "^1.0.0",
         "request": "^2.81.0",
         "uuid": "^9.0.0",
-        "chokidar" : "3.0.0"
+        "chokidar" : "3.5.3"
     }
 }
