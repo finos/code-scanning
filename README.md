@@ -182,6 +182,8 @@ Renovate will create a GitHub issue (titled `Renovate Dashboard`) with the recap
 - The list of Pull Requests sent daily is limited to 10.
 - In order to ignore an update, simply close its related Pull Request; Renovate won't ask for the update anymore, unless requested via the `Renovate Dashboard` issue.
 
+Note that Renovate can be configured to group multiple updates together, using the [`groupName` feature](https://docs.renovatebot.com/configuration-options/#groupname), which can save a lot of developers time, expecially on large codebases.
+
 ## Static code analysis
 To identify bugs in the hosted source code, that is, code that is written and hosted in your own repository, there are several tools out there; the one that proved to work well for us is https://semgrep.dev , and we designed a GitHub Action in `.github/workflows/semgrep.yml` that continuously scans the code upon every change.
 
