@@ -205,9 +205,23 @@ In order to test it locally, make sure to:
 4. `export SEMGREP_APP_TOKEN=<your personal semgrep token>`
 5. Run `semgrep scan --error --config auto` from the root folder
 
+## License reporting and scanning
+
+To enforce compliance of open source projects, it is crucial to validate that inbound libraries adopt a license that is "compatible" with the outbound one in terms of rights and obligations; for FINOS, the outbound license used is the [Apache License v2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)).
+
+There are hundreds of different open source licenses, some of which have conflicting clauses (you can learn more on [tldrlegal.com](https://tldrlegal.com)), and it's sometimes hard to understand the consequences of adopting a library with a different license than the outbound one, especially without having some legal background or knowledge.
+
+For this reason, we are working on automated tasks to continuously scan licenses being pulled within FINOS projects; such tools should be able to either:
+- Run a scanning process that takes as input the list of allowed licenses and the packages to ignore (preferred)
+- Build a report of licenses that can be manually reviewed and checked
+
+Right now, we have managed to automate [license reporting on Maven](https://github.com/maoo/vuu/blob/patch-1/.github/workflows/legal-report.yml) and [license scanning on Python](https://github.com/maoo/horizon-scanning-core/blob/main/.github/workflows/license-scanning.yml) and our intention is to cover also other languages/platforms with the same mechanisms.
+
+For more info about compliance requirements at FINOS, checkout our [Contribution Compliance Requirements](https://community.finos.org/docs/governance/Software-Projects/contribution-compliance-requirements) and [License Categories](https://community.finos.org/docs/governance/Software-Projects/license-categories) pages.
+
 ## Roadmap
-1. Add documentation into [community.finos.org](community.finos.org)
-2. Publish post on FINOS blog
+1. ~~Add documentation into [community.finos.org](community.finos.org)~~
+2. ~~Publish post on FINOS blog~~ - https://www.finos.org/blog/introducing-finos-security-scanning
 3. Push for adoption across FINOS projects
 4. Build a (centralized) GitHub Action to check for branch protection across GitHub repositories
 5. Build a (centralized) GitHub Action to check which repositories run security-scanning and which don't
