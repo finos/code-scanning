@@ -223,9 +223,9 @@ For more info about compliance requirements at FINOS, checkout our [Contribution
 1. ~~Add documentation into [community.finos.org](community.finos.org)~~
 2. ~~Publish post on FINOS blog~~ - https://www.finos.org/blog/introducing-finos-security-scanning
 3. Push for adoption across FINOS projects
-4. Build a (centralized) GitHub Action to check for branch protection across GitHub repositories
-5. Build a (centralized) GitHub Action to check which repositories run security-scanning and which don't
-6. Generate reports about security scanning usage: a private one, with details about code and repositories, for FINOS Staff use, and a public one, with anonymized data
+4. Add license reporting and scanning features
+5. Add support for C#
+6. Add support for [mill](https://github.com/com-lihaoyi/mill)
 
 ## Contributing
 For any bug, question or enhancement request, please [create a GitHub Issue](https://github.com/finos/security-scanning/issues)
