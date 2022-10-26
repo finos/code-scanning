@@ -14,9 +14,9 @@
 
 Given the wide range of platforms, languages and build systems used by FINOS projects, finding one solution that secures a codebase is not an easy task, especially considering the incredible amount of libraries available in public library repositories, which can be easily used, embedded, integrated and re-published; this proliferation of artifacts have dramatically influenced software development:
 
-- On average, 95% of the code shipped in a software artifact is composed of downstream libraries (aka dependencies), built, released and managed by external teams, communities and companies that the consumer has no control/influence over.
-- A developer has very little awareness of the codebase quality and software development process in the downstream dependencies of a project, unless going through code scrutiny, which is difficult and time consuming
-- Every programming language and build tool has a different way of consuming downstream dependencies, making security tool adoption harder and rarer; as a consequence, more security vulnerabilities are released into public library repositories, which leads to the exponential growth of vulnerabilities and risk for all consumers using these libraries
+- On average, 95% of the code shipped in a software artifact is composed of upstream libraries (aka dependencies), built, released and managed by external teams, communities and companies that the consumer has no control/influence over.
+- A developer has very little awareness of the codebase quality and software development process in the upstream dependencies of a project, unless going through code scrutiny, which is difficult and time consuming
+- Every programming language and build tool has a different way of consuming dependencies, making security tool adoption harder and rarer; as a consequence, more security vulnerabilities are released into public library repositories, which leads to the exponential growth of vulnerabilities and risk for all consumers using these libraries
 
 ## The solution
 
