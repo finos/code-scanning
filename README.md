@@ -1,4 +1,4 @@
-<img src="https://github.com/finos/finos-landscape/blob/staging/hosted_logos/finos-security-scanning.svg" alt="FINOS Security Scanning" width="200"/>
+<img src="https://github.com/finos/finos-landscape/blob/master/hosted_logos/finos-security-scanning.svg" alt="FINOS Security Scanning" width="200"/>
 
 [![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
