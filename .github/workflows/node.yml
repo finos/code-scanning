@@ -22,5 +22,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
         working-directory: node
-      - run: npx --yes auditjs ossi --whitelist allow-list.json
+      - run: npx --yes auditjs ossi
         working-directory: node
