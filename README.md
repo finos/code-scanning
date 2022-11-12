@@ -79,8 +79,7 @@ The [project descriptor](https://github.com/finos/security-scanning/blob/readme-
 To run `AuditJS` locally:
 1. Access the folder that contains the `package.json` file
 2. Cleanup the codebase from previous runs - `rm -rf node_modules package-lock.json yarn.lock`
-3. Install (only runtime) dependencies - `npm install --prod`
-Note: If using yarn run - yarn install --production --frozen-lockfile
+3. Install (only runtime) dependencies - `npm install --prod` ; if using yarn, the command should be `yarn install --production --frozen-lockfile`
 4. Run AuditJS - `npx --yes auditjs ossi`
 5. If you want to ignore errors, create an [allow-list.json](node/allow-list.json) file and append ` --whitelist allow-list.json` to the command on step 4
 
