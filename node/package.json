@@ -1,7 +1,7 @@
 {
-    "name": "security-comparison",
+    "name": "sample-project",
     "version": "0.0.1",
-    "description": "Security Comparison",
+    "description": "Sample project",
     "main": "index.js",
     "author": "FINOS <info@finos.org> (https://www.finos.org)",
     "license": "Apache-2.0",

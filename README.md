@@ -2,12 +2,12 @@
 
 [![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
-[![Gradle CI](https://github.com/finos/security-scanning/actions/workflows/gradle.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/gradle.yml)
-[![Maven CI](https://github.com/finos/security-scanning/actions/workflows/maven.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/maven.yml)
-[![Node.js CI](https://github.com/finos/security-scanning/actions/workflows/node.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/node.yml)
-[![Poetry CI](https://github.com/finos/security-scanning/actions/workflows/python.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/python.yml)
-[![Rust CI](https://github.com/finos/security-scanning/actions/workflows/rust.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/rust.yml)
-[![Scala CI](https://github.com/finos/security-scanning/actions/workflows/scala.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/scala.yml)
+[![Gradle CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-gradle.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-gradle.yml)
+[![Maven CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-maven.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-maven.yml)
+[![Node.js CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-node.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-node.yml)
+[![Poetry CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-python.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-python.yml)
+[![Rust CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-rust.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-rust.yml)
+[![Scala CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-scala.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-scala.yml)
 [![Static code analysis](https://github.com/finos/security-scanning/actions/workflows/semgrep.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/semgrep.yml)
 
 ## The problem
@@ -83,7 +83,7 @@ To run `AuditJS` locally:
 4. Run AuditJS - `npx --yes auditjs ossi`
 5. If you want to ignore errors, create an [allow-list.json](node/allow-list.json) file and append ` --whitelist allow-list.json` to the command on step 4
 
-The GitHub action can be copied from [here](.github/workflows/node.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
+The GitHub action can be copied from [here](.github/workflows/cve-scanning-node.yml) into your repo under `.github/workflows/cve-scanning-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 ### Python
 
@@ -104,7 +104,7 @@ poetry install
 poetry export --without-hashes -f requirements.txt --output requirements.txt
 ```
 
-The GitHub action can be copied from [here](.github/workflows/python.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
+The GitHub action can be copied from [here](.github/workflows/cve-scanning-python.yml) into your repo under `.github/workflows/cve-scanning-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 ### Maven
 
@@ -115,7 +115,7 @@ To run the `Maven Dependency Check Plugin` locally:
 2. Run `mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=7`
 3. If you want to ignore errors, create an [allow-list.xml](allow-list.xml) and append ` -DsuppressionFile="allow-list.xml"` to the command on step 2
 
-The GitHub action can be copied from [here](.github/workflows/maven.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
+The GitHub action can be copied from [here](.github/workflows/cve-scanning-maven.yml) into your repo under `.github/workflows/cve-scanning-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 ### Gradle
 
@@ -129,7 +129,7 @@ To run the `Gradle Dependency Check Plugin` locally:
 
 The `build.gradle` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the (famous) [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
 
-The GitHub action can be copied from [here](.github/workflows/gradle.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
+The GitHub action can be copied from [here](.github/workflows/cve-scanning-gradle.yml) into your repo under `.github/workflows/cve-scanning-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 ### Scala (with SBT)
 
@@ -143,7 +143,7 @@ To run the `Scala Dependency Check Plugin` locally:
 
 The `build.sbt` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the (famous) [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
 
-The GitHub action can be copied from [here](.github/workflows/scala.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
+The GitHub action can be copied from [here](.github/workflows/cve-scanning-scala.yml) into your repo under `.github/workflows/cve-scanning-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 To keep your library dependencies, sbt plugins, and Scala and sbt versions up-to-date, checkout [Scala Steward](https://github.com/scala-steward-org/scala-steward).
 
@@ -157,7 +157,7 @@ To run `Cargo Audit` locally:
 3. Run the scan with `cargo audit`
 4. Append `--ignore RUSTSEC-2020-0071` to the command on step 3
 
-The GitHub action can be copied from [here](.github/workflows/rust.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
+The GitHub action can be copied from [here](.github/workflows/cve-scanning-rust.yml) into your repo under `.github/workflows/cve-scanning-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 For more information about Cargo audit configuration, visit [https://docs.rs/cargo-audit/0.17.0/cargo_audit/config/index.html](https://docs.rs/cargo-audit/0.17.0/cargo_audit/config/index.html)
 
@@ -215,7 +215,7 @@ For this reason, we are working on automated tasks to continuously scan licenses
 - Run a scanning process that takes as input the list of allowed licenses and the packages to ignore (preferred)
 - Build a report of licenses that can be manually reviewed and checked
 
-Right now, we have managed to automate [license reporting on Maven](https://github.com/maoo/vuu/blob/patch-1/.github/workflows/legal-report.yml) and [license scanning on Python](https://github.com/maoo/horizon-scanning-core/blob/main/.github/workflows/license-scanning.yml) and our intention is to cover also other languages/platforms with the same mechanisms.
+Right now, we have managed to automate [license scanning on Maven](.github/workflows/license-scanning-maven.yml), [Python](.github/workflows/license-scanning-python.yml) and [Node.js](.github/workflows/license-scanning-node.yml) and our intention is to cover also other languages/platforms with the same mechanisms.
 
 For more info about compliance requirements at FINOS, checkout our [Contribution Compliance Requirements](https://community.finos.org/docs/governance/Software-Projects/contribution-compliance-requirements) and [License Categories](https://community.finos.org/docs/governance/Software-Projects/license-categories) pages.
 
