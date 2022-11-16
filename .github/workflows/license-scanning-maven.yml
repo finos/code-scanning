@@ -20,6 +20,7 @@ jobs:
       with:
         java-version: 1.16
         cache: maven
+        distribution: 'adopt'
     - name: Install XQ
       run: pip install xq
     - name: Build with Maven
