@@ -104,7 +104,7 @@ poetry install
 poetry export --without-hashes -f requirements.txt --output requirements.txt
 ```
 
-The GitHub action can be copied from [here](.github/workflows/cve-scanning-python.yml) into your repo under `.github/workflows/cve-scanning-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
+The GitHub action can be copied from [here](.github/workflows/cve-scanning-python.yml) into your repo under `.github/workflows/cve-scanning-python.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 ### Maven
 
