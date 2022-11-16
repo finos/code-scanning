@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "helloworld"
-version = "0.1.0"
-description = "Just a sample project"
+version = "0.0.1"
+description = "A sample project"
 homepage = "https://github.com/finos"
 authors = ["FINOS <info@finos.org>"]
 license = "Apache-2.0"
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 0.1.0",
     "License :: OSI Approved :: Apache Software License",
     "Topic :: Utilities"
 ]
