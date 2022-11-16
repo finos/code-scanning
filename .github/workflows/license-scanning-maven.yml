@@ -37,13 +37,11 @@ jobs:
       working-directory: maven
     - name: Upload license reports
       uses: actions/upload-artifact@v3
-      working-directory: maven
       with:
         name: license-reports
-        path: '**/dependencies.html'
+        path: 'maven/**/dependencies.html'
     - name: Upload license XML reports
       uses: actions/upload-artifact@v3
-      working-directory: maven
       with:
         name: license-xml-report
-        path: '**/${{ env.REPORT_PATH }}'
+        path: 'maven/**/${{ env.REPORT_PATH }}'
