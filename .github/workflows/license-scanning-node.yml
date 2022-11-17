@@ -19,7 +19,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install --prod
+      - run: npm ci --prod
+#       - run: yarn install --production --frozen-lockfile
         working-directory: node
       - run: npm install -g node-license-validator
         working-directory: node
