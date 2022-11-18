@@ -21,7 +21,7 @@
   - [Gradle](#Gradle)
   - [Scala](#Scala)
   - [Rust](#Rust)
-  - [.NET](#.NET)
+  - [.NET](#net)
   - [Docker](#Docker)
   - [Other languages and build platforms](#Other-languages-and-build-platforms)
 - [Dependency update tool](#Dependency-update-tool)
