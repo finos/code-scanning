@@ -252,7 +252,7 @@ In order to test it locally, make sure to:
 1. [Install Semgrep](https://semgrep.dev/docs/getting-started/)
 2. Signup to [semgrep.dev](semgrep.dev)
 3. Generate a token, using the `Settings` menu option
-4. `export SEMGREP_APP_TOKEN=<your personal semgrep token>`
+4. (optional) `export SEMGREP_APP_TOKEN=<your personal semgrep token>` - to aggregate results on FINOS (private) dashboard
 5. Run `semgrep scan --error --config auto` from the root folder
 
 ## License reporting and scanning
