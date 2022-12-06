@@ -57,6 +57,7 @@
         <cve>CVE-2014-0050</cve>
         <cve>CVE-2016-3092</cve>
         <cve>CVE-2013-0248</cve>
+        <cve>CVE-2021-37533</cve>
     </suppress>
     <suppress>
         <notes><![CDATA[
@@ -64,6 +65,14 @@
         ]]></notes>
         <gav>commons-io:commons-io:2.0.1</gav>
         <cve>CVE-2021-29425</cve>
+        <cve>CVE-2021-37533</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        Testing false positives by suppressing a CVE
+        ]]></notes>
+        <gav>commons-lang:commons-lang3:3.1</gav>
+        <cve>CVE-2021-37533</cve>
     </suppress>
     <suppress>
         <notes><![CDATA[
