@@ -115,9 +115,10 @@ The python sample project defines a dependency on [`insecure-package`](https://p
 To run `Safety` locally:
 1. Access the folder containing the `requirements.txt` file
 2. Make sure you're running Python 3.x using `python --version`, otherwise the version of `safety` that you're able to use would be quite outdated
-3. Install safety with `pip install safety`
-4. Run safety with `safety check --full-report -r requirements.txt`
-5. If you want to ignore errors, create a [safety-policy.yml](python/safety-policy.yml) and append ` --policy-file safety-policy.yml` to the command on step 4
+3. Create a virtual environment using `python -m venv .`
+4. Install safety with `pip install safety` - we need to run this step since the scanning will run through all libraries available in the current Python environment
+5. Run safety with `safety check --full-report -r requirements.txt`
+6. If you want to ignore errors, create a [safety-policy.yml](python/safety-policy.yml) and append ` --policy-file safety-policy.yml` to the command on step 4
 
 If you're using [Poetry](https://python-poetry.org/), you can simply export your libaries into a `requirements.txt` file and then follow the steps above, using:
 ```
