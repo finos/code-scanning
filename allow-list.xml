@@ -71,7 +71,7 @@
         <notes><![CDATA[
         Testing false positives by suppressing a CVE
         ]]></notes>
-        <gav>commons-lang:commons-lang3:3.1</gav>
+        <gav>org.apache.commons:commons-lang3:3.1</gav>
         <cve>CVE-2021-37533</cve>
     </suppress>
     <suppress>
