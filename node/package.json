@@ -23,7 +23,7 @@
         "aws-sdk": "^2.149.0",
         "handlebars": "^4.4.2",
         "is_js": "^0.9.0",
-        "jsonwebtoken": "^8.4.0",
+        "jsonwebtoken": "^9.0.0",
         "parse-github-url": "^1.0.0",
         "request": "^2.81.0",
         "uuid": "^9.0.0",
