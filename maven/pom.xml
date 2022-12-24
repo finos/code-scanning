@@ -25,7 +25,7 @@
             <!-- <version>6.0.0</version> -->
             <!-- <scope>test</scope> -->
             <!-- This breaks CVE scanning, assuming the suppression file doesn't include this version/CVEs ; see ../allow-list.xml -->
-            <version>2.3.8</version>
+            <version>2.5.30</version>
         </dependency>
     </dependencies>
        
