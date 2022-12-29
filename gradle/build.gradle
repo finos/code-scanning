@@ -37,6 +37,7 @@ java {
 dependencyCheck {
     failBuildOnCVSS=5
     suppressionFile="../allow-list.xml"
+    ossindexAnalyzerEnabled=false
 }
 
 publishing {
