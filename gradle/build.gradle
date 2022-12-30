@@ -38,6 +38,11 @@ dependencyCheck {
     failBuildOnCVSS=5
     suppressionFile="../allow-list.xml"
     ossindexAnalyzerEnabled=false
+    analyzers {
+    	ossIndex {
+            enabled = false
+	}
+    }
 }
 
 publishing {
