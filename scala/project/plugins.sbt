@@ -1,1 +1,1 @@
-addSbtPlugin("net.vonbuchholtz" % "sbt-dependency-check" % "4.2.0")
+addSbtPlugin("net.vonbuchholtz" % "sbt-dependency-check" % "4.3.0")
