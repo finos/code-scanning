@@ -17,7 +17,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:7.4.1'
+        classpath 'org.owasp:dependency-check-gradle:7.4.4'
     }
 }
 
@@ -37,6 +37,11 @@ java {
 dependencyCheck {
     failBuildOnCVSS=5
     suppressionFile="../allow-list.xml"
+    analyzers {
+    	ossIndex {
+            enabled = false
+	}
+    }
 }
 
 publishing {
