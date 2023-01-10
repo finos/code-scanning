@@ -1,3 +1,6 @@
+[virtualenvs]
+in-project = true
+
 [tool.poetry]
 name = "helloworld"
 version = "0.0.1"
@@ -14,9 +17,11 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 colorama = "^0.4.5"
-safety = "2.3.5"
 # Enable it to see the scan failing, although ignored by safety-policy.yml
 insecure-package = "0.1.0"
+
+[tool.poetry.dev-dependencies]
+safety = "2.3.5"
 
 [tool.poetry.scripts]
 helloworld = 'helloworld.cli:run'
