@@ -94,4 +94,11 @@
         <cve>CVE-2019-0233</cve>
         <cve>CVE-2016-2162</cve>
     </suppress>
+        <suppress>
+        <notes><![CDATA[
+        Testing false positives by suppressing a CVE
+        ]]></notes>
+        <gav>commons-fileupload:commons-fileupload:1.2.2</gav>
+        <cve>CVE-2023-24998</cve>
+    </suppress>    
 </suppressions>
