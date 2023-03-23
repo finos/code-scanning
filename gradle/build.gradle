@@ -17,7 +17,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:8.2.0'
+        classpath 'org.owasp:dependency-check-gradle:8.2.1'
     }
 }
 
