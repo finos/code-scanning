@@ -1,9 +1,6 @@
 {
     "ignore": [
-        { "id": "sonatype-2021-0459", "reason": "Testing whitelist" },
-        { "id": "CVE-2020-28469", "reason": "Testing whitelist" },
-        { "id": "sonatype-2017-0655", "reason": "Testing whitelist" },
-        { "id": "CVE-2021-23440", "reason": "Testing whitelist" },
-        { "id": "CVE-2020-26302", "reason": "Testing whitelist" }
+        { "id": "sonatype-2021-0459", "reason": "is_js still on version 0.9.0" },
+        { "id": "CVE-2023-0842", "reason": "xml2js 0.5.0 still affected, even if overridden" }
     ]
 }
