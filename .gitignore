@@ -21,6 +21,7 @@ scala/**/target
 scala/target
 scala/boot
 rust/target
+dotnet/obj/Debug
 
 # Others
 .classpath
