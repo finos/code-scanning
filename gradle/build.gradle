@@ -17,13 +17,13 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:7.4.4'
+        classpath 'org.owasp:dependency-check-gradle:8.2.1'
     }
 }
 
 dependencies {
     implementation 'com.google.guava:guava:31.1-jre'
-    implementation "joda-time:joda-time:2.12.2"
+    implementation "joda-time:joda-time:2.12.5"
     implementation "org.apache.struts:struts2-core:2.3.8"
     // testImplementation "org.apache.struts:struts2-core:2.3.8"
     testImplementation "junit:junit:4.13.2"
@@ -53,6 +53,6 @@ publishing {
 }
 
 wrapper {
-    gradleVersion = "7.6"
+    gradleVersion = "8.0.2"
     distributionType = Wrapper.DistributionType.ALL
 }
