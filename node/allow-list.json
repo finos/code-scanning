@@ -1,6 +1,8 @@
 {
     "ignore": [
         { "id": "sonatype-2021-0459", "reason": "is_js latest version is still 0.9.0 (direct dependency, see package.json)" },
+        { "id": "CVE-2020-26302", "reason": "is_js latest version is still 0.9.0 (direct dependency, see package.json)" },
+        
         { "id": "CVE-2023-0842", "reason": "xml2js 0.5.0 still affected, even if overridden (coming from aws-sdk 2.1353.0)" }
     ]
 }
