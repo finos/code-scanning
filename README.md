@@ -99,10 +99,11 @@ The [project descriptor](https://github.com/finos/security-scanning/blob/readme-
 
 To run `AuditJS` locally:
 1. Access the folder that contains the `package.json` file
-2. Cleanup the codebase from previous runs - `rm -rf node_modules package-lock.json yarn.lock`
+2. Cleanup the codebase from previous runs - `rm -rf node_modules`
 3. Install (only runtime) dependencies - `npm ci --prod` ; if using yarn, the command should be `yarn install --production --frozen-lockfile`
 4. Run AuditJS - `npx --yes auditjs ossi`
 5. If you want to ignore errors, create an [allow-list.json](node/allow-list.json) file and append ` --whitelist allow-list.json` to the command on step 4
+6. You should see from this example 1 vulnerability - `pkg:npm/is_js@0.9.0 - 1 vulnerability found!`
 
 The GitHub action can be copied from [here](.github/workflows/cve-scanning-node.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
