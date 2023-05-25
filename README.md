@@ -112,6 +112,12 @@ The Python sample project uses the [`safety` library](https://pyup.io/safety/), 
 
 The python sample project defines a dependency on [`insecure-package`](https://pypi.org/project/insecure-package/), which pulls a CVE that is ignored in the `safety-policy.yml`, in order to demo how to manage false positives.
 
+If you're using [Poetry](https://python-poetry.org/), you can simply export your libaries into a `requirements.txt` file and then follow the steps above, using:
+```
+poetry install
+poetry export --without-hashes -f requirements.txt --output requirements.txt
+```
+
 To run `Safety` locally:
 1. Access the folder containing the `requirements.txt` file
 2. Make sure you're running Python 3.x using `python --version`, otherwise the version of `safety` that you're able to use would be quite outdated
@@ -119,12 +125,8 @@ To run `Safety` locally:
 4. Install safety with `pip install safety` - we need to run this step since the scanning will run through all libraries available in the current Python environment
 5. Run safety with `safety check --full-report -r requirements.txt`
 6. If you want to ignore errors, create a [safety-policy.yml](python/safety-policy.yml) and append ` --policy-file safety-policy.yml` to the command on step 4
+7. You should see from this example 1 vulnerability - `Vulnerability found in insecure-package version 0.1.0`
 
-If you're using [Poetry](https://python-poetry.org/), you can simply export your libaries into a `requirements.txt` file and then follow the steps above, using:
-```
-poetry install
-poetry export --without-hashes -f requirements.txt --output requirements.txt
-```
 
 The GitHub action can be copied from [here](.github/workflows/cve-scanning-python.yml) into your repo under `.github/workflows/cve-scanning-python.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
