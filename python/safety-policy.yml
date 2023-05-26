@@ -6,5 +6,6 @@ security:
             reason: Testing CVE suppression
             # expires: '2023-12-31'
         52365:
-            reason: coming from safety, which is a dev dependency
-    continue-on-vulnerability-error: False
+            reason: Testing CVE suppression
+        58758:
+            reason: Testing CVE suppression
