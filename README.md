@@ -193,7 +193,9 @@ The .NET sample project uses the [dotnet](https://learn.microsoft.com/en-us/dotn
 To run `dotnet` locally:
 1. Access the root project folder, where your `.csproj` file is defined
 2. Install [.NET CLI](https://learn.microsoft.com/en-us/dotnet/core/tools/)
-3. Run the scan with `dotnet list package --vulnerable --include-transitive`
+3. Run `dotnet build`
+4. Run the scan with `dotnet list package --vulnerable --include-transitive`
+5. You should see this vulnerability `Newtonsoft.Json      12.0.3      12.0.3     High       https://github.com/advisories/GHSA-5crp-9r3c-p9vr`
 
 The GitHub action can be copied from [here](.github/workflows/cve-scanning-dotnet.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
