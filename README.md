@@ -210,7 +210,7 @@ There are many CLI tools that perform a docker image scanning; the easiest one i
 For GitHub Actions, we are using [trivy][trivy.dev], wrapped into [this GitHub Action](https://github.com/crazy-max/ghaction-container-scan).
 
 To run locally, [follow instructions on how to install trivy locally](https://github.com/aquasecurity/trivy#get-trivy), then run:
-1. `docker build -f Dockerfile -t user/image-name:latest`
+1. `docker build -f Dockerfile -t user/image-name:latest .`
 2. `trivy image user/image-name:latest`
 
 The GitHub action can be copied from [here](.github/workflows/cve-scanning-docker.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
