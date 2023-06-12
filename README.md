@@ -172,7 +172,7 @@ If you want to test `dependencyCheck`:
 1. Open the file `build.sbt`
 2. Comment the line `dependencyCheckSuppressionFiles ++= List(file("../allow-list.xml")),`
 3. Run `sbt dependencyCheck`
-The build should fail because there's a CVSS score higher 5.0 
+The build should fail and show all CVEs pulled by struts2.
 
 The GitHub action can be copied from [here](.github/workflows/cve-scanning-scala.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
