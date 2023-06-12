@@ -168,6 +168,12 @@ To run the `Scala Dependency Check Plugin` locally:
 
 The `build.sbt` file defines a (commented) dependency on `struts2` version 2.3.8, which contains the CVE that led to the (famous) [equifax hack](https://nvd.nist.gov/vuln/detail/cve-2017-5638). By uncommenting it, the build is expected to fail, assuming that CVEs are not suppressed by the `allow-list.xml` file, used to manage false positives.
 
+If you want to test `dependencyCheck`: 
+1. Open the file `build.sbt`
+2. Comment the line `dependencyCheckSuppressionFiles ++= List(file("../allow-list.xml")),`
+3. Run `sbt dependencyCheck`
+The build should fail and show all CVEs pulled by struts2.
+
 The GitHub action can be copied from [here](.github/workflows/cve-scanning-scala.yml) into your repo under `.github/workflows/cve-scanning.yml`; make sure to adapt the code to your [project layout](#project-layout).
 
 To keep your library dependencies, sbt plugins, and Scala and sbt versions up-to-date, checkout [Scala Steward](https://github.com/scala-steward-org/scala-steward).
