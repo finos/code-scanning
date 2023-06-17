@@ -9,7 +9,7 @@
         "scan-cves" : "npx --yes auditjs ossi --whitelist allow-list.json"
     },
     "devDependencies": {
-        "dotenv": "16.3.0",
+        "dotenv": "16.3.1",
         "eslint": "8.43.0",
         "eslint-plugin-prettier": "4.2.1",
         "jasmine": "5.0.2",
