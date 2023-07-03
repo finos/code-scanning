@@ -5,6 +5,8 @@
         Testing false positives by suppressing a CVE
         ]]></notes>
         <gav>org.apache.struts:struts2-core:2.3.8</gav>
+        <cve>CVE-2023-34396</cve>
+        <cve>CVE-2023-34149</cve>
         <cve>CVE-2017-5638</cve>
         <cve>CVE-2016-3082</cve>
         <cve>CVE-2016-4436</cve>
