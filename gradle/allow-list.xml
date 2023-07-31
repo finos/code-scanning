@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <suppress>
+          <notes><![CDATA[
+        Testing false positives by suppressing a CVE
+        ]]></notes>
+    <filePath regex="true">.*\bjquery-ui\.min\.js</filePath>
+        <cve>CVE-2022-31160</cve>
+    </suppress>
+
+    
+    <suppress>
+          <notes><![CDATA[
+        Testing false positives by suppressing a CVE
+        ]]></notes>
+    <filePath regex="true">.*\bjszip\.js</filePath>
+        <cve>CVE-2022-48285</cve>
+    </suppress>
+
+    <suppress>
+          <notes><![CDATA[
+        Testing false positives by suppressing a CVE
+        ]]></notes>
+    <filePath regex="true">.*\bjszip\.min\.js</filePath>
+        <cve>CVE-2022-48285</cve>
+    </suppress>
+
+     <suppress>
+          <notes><![CDATA[
+        Testing false positives by suppressing a CVE
+        ]]></notes>
+    <filePath regex="true">.*\bgradle-0\.0\.1\.jar</filePath>
+        <cve>CVE-2019-16370</cve>
+        <cve>CVE-2021-32751</cve>
+        <cve>CVE-2021-29429</cve>
+        <cve>CVE-2021-29428</cve>
+        <cve>CVE-2020-11979</cve>
+        <cve>CVE-2019-15052</cve>
+        <cve>CVE-2023-35946</cve>
+        <cve>CVE-2022-30586</cve>
+        <cve>CVE-2023-35947</cve>
+    </suppress>
+
+    <suppress>
+          <notes><![CDATA[
+        Testing false positives by suppressing a CVE
+        ]]></notes>
+    <filePath regex="true">.*\bgradle-0\.0\.1-javadoc\.jar</filePath>
+        <cve>CVE-2019-16370</cve>
+        <cve>CVE-2021-32751</cve>
+        <cve>CVE-2021-29429</cve>
+        <cve>CVE-2021-29428</cve>
+        <cve>CVE-2020-11979</cve>
+        <cve>CVE-2019-15052</cve>
+        <cve>CVE-2023-35946</cve>
+        <cve>CVE-2022-30586</cve>
+        <cve>CVE-2023-35947</cve>
+    </suppress>
+
+    <suppress>
+          <notes><![CDATA[
+        Testing false positives by suppressing a CVE
+        ]]></notes>
+    <filePath regex="true">.*\bgradle-0\.0\.1-sources\.jar</filePath>
+        <cve>CVE-2019-16370</cve>
+        <cve>CVE-2021-32751</cve>
+        <cve>CVE-2021-29429</cve>
+        <cve>CVE-2021-29428</cve>
+        <cve>CVE-2020-11979</cve>
+        <cve>CVE-2019-15052</cve>
+        <cve>CVE-2023-35946</cve>
+        <cve>CVE-2022-30586</cve>
+        <cve>CVE-2023-35947</cve>
+    </suppress>    
+</suppressions>
