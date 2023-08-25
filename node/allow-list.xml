@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+<suppressions
+    xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
     <suppress>
-          <notes><![CDATA[
+        <notes>
+            <![CDATA[
         Testing false positives by suppressing a CVE
-        ]]></notes>
-    <filePath regex="true">.*\bis_js:0\.9\.0</filePath>
+        ]]>
+        </notes>
+        <filePath regex="true">.*\bis_js:0\.9\.0</filePath>
         <cve>CVE-2020-26302</cve>
     </suppress>
-
     <suppress>
-          <notes><![CDATA[
+        <notes>
+            <![CDATA[
         Testing false positives by suppressing a CVE
-        ]]></notes>
-    <filePath regex="true">.*\bsemver:7\.5\.1</filePath>
+        ]]>
+        </notes>
+        <filePath regex="true">.*\bsemver:7\.5\.1</filePath>
         <cve>CVE-2022-25883</cve>
     </suppress>
-
     <suppress>
-          <notes><![CDATA[
+        <notes>
+            <![CDATA[
         Testing false positives by suppressing a CVE
-        ]]></notes>
-    <packageUrl regex="true">^pkg:npm/semver@7\.5\.1</packageUrl>
-        <cve>CVE-2022-25883</cve>
+        ]]>
+        </notes>
+        <packageUrl regex="true">^pkg:npm/is_js@.*$</packageUrl>
+        <vulnerabilityName>GHSA-pvrw-g6fx-mcx2</vulnerabilityName>
     </suppress>
-
     <suppress>
-          <notes><![CDATA[
+        <notes>
+            <![CDATA[
         Testing false positives by suppressing a CVE
-        ]]></notes>
-    <packageUrl regex="true">^pkg:npm/is_js@0\.9\.0</packageUrl>
-        <cve>CVE-2020-26302</cve>
+        ]]>
+        </notes>
+        <packageUrl regex="true">^pkg:npm/semver@.*$</packageUrl>
+        <vulnerabilityName>GHSA-c2qf-rxjj-qqgw</vulnerabilityName>
     </suppress>
 </suppressions>
