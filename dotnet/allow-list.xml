@@ -4,7 +4,6 @@
           <notes><![CDATA[
         Testing false positives by suppressing a CVE
         ]]></notes>
-    <filePath regex="true">.*\bsample-project-0\.0\.1\.jar/META-INF/maven/commons-fileupload/commons-fileupload/pom\.xml</filePath>
         <cve>CVE-2022-41064</cve>
     </suppress>
 </suppressions>
