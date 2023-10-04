@@ -93,7 +93,13 @@ In the `.github/workflows` folder you'll find a GitHub Action for each of these 
 
 ### NodeJS
 
-The NodeJS sample project uses [AuditJS](https://www.npmjs.com/package/auditjs), a library built by Sonatype which provides a very good alternative to `npm audit`; you can read more about their comparison on https://blog.sonatype.com/compare-npm-audit-versus-auditjs .
+The NodeJS sample is using [DependencyCheck](http://jeremylong.github.io/DependencyCheck/) that is a open-source solution to the OWASP top 10 2021 [(A06:2021)](https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/), with allow-list.xml to ignore false positives.
+
+You can view the result by: 
+1. Clicking on Actions
+2. CVE Scanning for Node.js
+3. Clicking on the latest run action
+4. You will see in artifacts `Depcheck report` click on this to download the zip folder with a HTML file inside, if you open the HTML file you will see CVE's that are positive, ignored CVE'S and how much dependency's are scanned. 
 
 The [project descriptor](https://github.com/finos/security-scanning/blob/readme-improvement/node/package.json) pulls the `chokidar 2.0.3` dependency, which contains some CVEs that are ignored into the list of ignored errors.
 
