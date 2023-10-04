@@ -101,7 +101,7 @@ You can view the result by:
 3. Clicking on the latest run action
 4. You will see in artifacts `Depcheck report` click on this to download the zip folder with a HTML file inside, if you open the HTML file you will see CVE's that are positive, ignored CVE'S and how much dependency's are scanned. 
 
-The [project descriptor](https://github.com/finos/security-scanning/blob/readme-improvement/node/package.json) pulls the `chokidar 2.0.3` dependency, which contains some CVEs that are ignored into the list of ignored errors.
+The [project](https://github.com/finos/security-scanning/tree/main/node) delete 2 vulnerability in the allow.list.xml file, if you delete one of the vulnerability from the allow-list.xml you can see DependencyCheck in action and how it detect CVE'S. 
 
 To run `AuditJS` locally:
 1. Access the folder that contains the `package.json` file
