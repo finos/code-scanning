@@ -90,7 +90,7 @@ In the `.github/workflows` folder you'll find a GitHub Action for each of these 
 8. Push the changes to GitHub and checkout the Github Action run and output.
 
 ## OWASP Dependency Check
-The [OWASP Dependency Check](https://owasp.org/www-project-dependency-check/) is a security scanning tool that supports multiple languages, some of which are listed below; it is widely adopted and makes life easier, especially for multi-language projects, as it provides a standard way to define scanning configurations.
+The [OWASP Dependency Check](https://owasp.org/www-project-dependency-check/) (or simply OWASP DC) is a security scanning tool that supports multiple languages, some of which are listed below; it is widely adopted and makes life easier, especially for multi-language projects, as it provides a standard way to define scanning configurations.
 
 It also provides Docker images and GitHub Actions that are nightly built, including the latest and greatest CVE dictionaries that are used to scan project dependencies, allowing the scanning process to be self-contained yet fast (and less error-prone due to usage quota or connectivity issues).
 
@@ -99,6 +99,8 @@ We have used the [OWASP Dependency Check Action](https://github.com/dependency-c
 - [Maven](.github/workflows/cve-scanning-maven.yml)
 - [Gradle](.github/workflows/cve-scanning-gradle.yml)
 - [.NET](.github/workflows/cve-scanning-dotnet.yml)
+
+In these examples, the OWASP DC Action is also responsible to upload a report as build artifact, which you can access from the Github's Actions tab.
 
 ## Supported languages
 
