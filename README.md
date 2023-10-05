@@ -89,6 +89,17 @@ In the `.github/workflows` folder you'll find a GitHub Action for each of these 
 7. From the GitHub `Actions` tab, you can select the `CVE Scanning` action and `Create status badge`, which will allow you to copy Markdown code for your `README.md` file that shows a badge with the result of the last action run; this is quite useful for consumers to see that code is scanned and that no CVEs were spotted in the main codebase branch.
 8. Push the changes to GitHub and checkout the Github Action run and output.
 
+## OWASP Dependency Check
+The [OWASP Dependency Check](https://owasp.org/www-project-dependency-check/) is a security scanning tool that supports multiple languages, some of which are listed below; it is widely adopted and makes life easier, especially for multi-language projects, as it provides a standard way to define scanning configurations.
+
+It also provides Docker images and GitHub Actions that are nightly built, including the latest and greatest CVE dictionaries that are used to scan project dependencies, allowing the scanning process to be self-contained yet fast (and less error-prone due to usage quota or connectivity issues).
+
+We have used the [OWASP Dependency Check Action](https://github.com/dependency-check/Dependency-Check_Action) to run the scanning continuosly, across the following build platforms:
+- [NodeJS](.github/workflows/cve-scanning-node.yml)
+- [Maven](.github/workflows/cve-scanning-maven.yml)
+- [Gradle](.github/workflows/cve-scanning-gradle.yml)
+- [.NET](.github/workflows/cve-scanning-dotnet.yml)
+
 ## Supported languages
 
 ### NodeJS
