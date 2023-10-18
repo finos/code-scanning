@@ -8,7 +8,7 @@
 [![Poetry CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-python.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-python.yml)
 [![Rust CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-rust.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-rust.yml)
 [![Scala CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-scala.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-scala.yml)
-[![Static code analysis](https://github.com/finos/security-scanning/actions/workflows/semgrep.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/semgrep.yml)
+[![Static code analysis](https://github.com/finos/security-scanning/actions/workflows/semgrep-ci.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/semgrep-ci.yml)
 
 ## Table of contents
 - [The problem](#The-problem)
