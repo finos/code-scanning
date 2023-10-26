@@ -1,14 +1,14 @@
-<img src="https://github.com/finos/finos-landscape/blob/master/hosted_logos/finos-security-scanning.svg" alt="FINOS Security Scanning" width="200"/>
+<img src="https://github.com/finos/finos-landscape/blob/master/hosted_logos/finos-code-scanning.svg" alt="FINOS Security Scanning" width="200"/>
 
 [![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
-[![Gradle CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-gradle.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-gradle.yml)
-[![Maven CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-maven.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-maven.yml)
-[![Node.js CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-node.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-node.yml)
-[![Poetry CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-python.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-python.yml)
-[![Rust CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-rust.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-rust.yml)
-[![Scala CI](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-scala.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/cve-scanning-scala.yml)
-[![Static code analysis](https://github.com/finos/security-scanning/actions/workflows/semgrep-ci.yml/badge.svg)](https://github.com/finos/security-scanning/actions/workflows/semgrep-ci.yml)
+[![Gradle CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-gradle.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-gradle.yml)
+[![Maven CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-maven.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-maven.yml)
+[![Node.js CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-node.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-node.yml)
+[![Poetry CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-python.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-python.yml)
+[![Rust CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-rust.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-rust.yml)
+[![Scala CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-scala.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-scala.yml)
+[![Static code analysis](https://github.com/finos/code-scanning/actions/workflows/semgrep-ci.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/semgrep-ci.yml)
 
 ## Table of contents
 - [The problem](#The-problem)
@@ -108,7 +108,7 @@ In these examples, the OWASP DC Action is also responsible to upload a report as
 
 The NodeJS sample project uses [AuditJS](https://www.npmjs.com/package/auditjs), a library built by Sonatype which provides a very good alternative to `npm audit`; you can read more about their comparison on https://blog.sonatype.com/compare-npm-audit-versus-auditjs .
 
-The [project descriptor](https://github.com/finos/security-scanning/blob/readme-improvement/node/package.json) pulls the `chokidar 2.0.3` dependency, which contains some CVEs that are ignored into the list of ignored errors.
+The [project descriptor](https://github.com/finos/code-scanning/blob/readme-improvement/node/package.json) pulls the `chokidar 2.0.3` dependency, which contains some CVEs that are ignored into the list of ignored errors.
 
 To run `AuditJS` locally:
 1. Access the folder that contains the `package.json` file
@@ -296,15 +296,15 @@ For more info about compliance requirements at FINOS, checkout our [Contribution
 
 ## Roadmap
 1. ~~Add documentation into [community.finos.org](community.finos.org)~~
-2. ~~Publish post on FINOS blog~~ - https://www.finos.org/blog/introducing-finos-security-scanning
+2. ~~Publish post on FINOS blog~~ - https://www.finos.org/blog/introducing-finos-code-scanning
 3. Push for adoption across FINOS projects
 4. Add license reporting and scanning features
 5. Add support for C#
 6. Add support for [mill](https://github.com/com-lihaoyi/mill)
 
 ## Contributing
-For any bug, question or enhancement request, please [create a GitHub Issue](https://github.com/finos/security-scanning/issues)
-1. Fork it (<https://github.com/finos/security-scanning/fork>)
+For any bug, question or enhancement request, please [create a GitHub Issue](https://github.com/finos/code-scanning/issues)
+1. Fork it (<https://github.com/finos/code-scanning/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Read our [contribution guidelines](./CONTRIBUTING.md) and [Community Code of Conduct](https://www.finos.org/code-of-conduct)
 4. Commit your changes (`git commit -am 'Add some fooBar'`)
