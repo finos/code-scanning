@@ -1,4 +1,4 @@
-<img src="https://github.com/finos/finos-landscape/blob/master/hosted_logos/finos-code-scanning.svg" alt="FINOS Security Scanning" width="200"/>
+<img src="https://github.com/finos/finos-landscape/blob/master/hosted_logos/finos-code-scanning.svg" alt="FINOS Code Scanning" width="200"/>
 
 [![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
@@ -41,7 +41,7 @@ Given the wide range of platforms, languages and build systems used by FINOS pro
 
 ## The solution
 
-Let's first recap requirements, based on the considerations made above; a security scanning should be:
+Let's first recap requirements, based on the considerations made above; a code scan should be:
 - Proactive (triggered periodically, ie every day) and reactive (triggered on code changes)
 - Compatible with all languages and build platforms adopted by FINOS hosted projects
 - Easy to operate by project teams, git-based, without the need for external dashboards
@@ -90,7 +90,7 @@ In the `.github/workflows` folder you'll find a GitHub Action for each of these 
 8. Push the changes to GitHub and checkout the Github Action run and output.
 
 ## OWASP Dependency Check
-The [OWASP Dependency Check](https://owasp.org/www-project-dependency-check/) (or simply OWASP DC) is a security scanning tool that supports multiple languages, some of which are listed below; it is widely adopted and makes life easier, especially for multi-language projects, as it provides a standard way to define scanning configurations.
+The [OWASP Dependency Check](https://owasp.org/www-project-dependency-check/) (or simply OWASP DC) is a code scanning tool that supports multiple languages, some of which are listed below; it is widely adopted and makes life easier, especially for multi-language projects, as it provides a standard way to define scanning configurations.
 
 It also provides Docker images and GitHub Actions that are nightly built, including the latest and greatest CVE dictionaries that are used to scan project dependencies, allowing the scanning process to be self-contained yet fast (and less error-prone due to usage quota or connectivity issues).
 
@@ -157,7 +157,7 @@ The GitHub action can be copied from [here](.github/workflows/cve-scanning-maven
 
 ### Gradle
 
-The Gradle sample project uses the [OWASP Dependency Check plugin for Gradle](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html). Sadly, Gradle [doesn't allow to invoke plugins without altering the build manifest](https://discuss.gradle.org/t/invoking-tasks-provided-by-a-plugin-without-altering-the-build-file/27235), namely `build.gradle`; follow instructions below to know how to add security scanning in your project.
+The Gradle sample project uses the [OWASP Dependency Check plugin for Gradle](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html). Sadly, Gradle [doesn't allow to invoke plugins without altering the build manifest](https://discuss.gradle.org/t/invoking-tasks-provided-by-a-plugin-without-altering-the-build-file/27235), namely `build.gradle`; follow instructions below to know how to add code scanning in your project.
 
 To run the `Gradle Dependency Check Plugin` locally:
 1. Access the folder containing the `build.gradle` file
@@ -296,7 +296,7 @@ For more info about compliance requirements at FINOS, checkout our [Contribution
 
 ## Roadmap
 1. ~~Add documentation into [community.finos.org](community.finos.org)~~
-2. ~~Publish post on FINOS blog~~ - https://www.finos.org/blog/introducing-finos-code-scanning
+2. ~~Publish post on FINOS blog~~ - https://www.finos.org/blog/introducing-finos-security-scanning
 3. Push for adoption across FINOS projects
 4. Add license reporting and scanning features
 5. Add support for C#
