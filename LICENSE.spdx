@@ -3,5 +3,5 @@ DataLicense: CC0-1.0
 Creator: Maurizio Pillitu (FINOS)
 PackageName: FINOS Security Scanning
 PackageOriginator: FINOS
-PackageHomePage: https://github.com/finos/security-scanning
+PackageHomePage: https://github.com/finos/code-scanning
 PackageLicenseDeclared: Apache-2.0
