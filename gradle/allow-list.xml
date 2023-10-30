@@ -25,24 +25,6 @@
         <cve>CVE-2022-48285</cve>
     </suppress>
 
-     <suppress>
-          <notes><![CDATA[
-        Testing false positives by suppressing a CVE
-        ]]></notes>
-    <filePath regex="true">.*\bgradle-0\.0\.1\.jar</filePath>
-        <cve>CVE-2019-16370</cve>
-        <cve>CVE-2021-32751</cve>
-        <cve>CVE-2021-29429</cve>
-        <cve>CVE-2021-29428</cve>
-        <cve>CVE-2020-11979</cve>
-        <cve>CVE-2019-15052</cve>
-        <cve>CVE-2023-35946</cve>
-        <cve>CVE-2022-30586</cve>
-        <cve>CVE-2023-35947</cve>
-        <cve>CVE-2023-44387</cve>
-        <cve>CVE-2023-42445</cve> 
-    </suppress>
-
     <suppress>
           <notes><![CDATA[
         Testing false positives by suppressing a CVE
