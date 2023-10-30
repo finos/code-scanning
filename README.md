@@ -102,6 +102,10 @@ We have used the [OWASP Dependency Check Action](https://github.com/dependency-c
 
 In these examples, the OWASP DC Action is also responsible to upload a report as build artifact, which you can access from the Github's Actions tab.
 
+You can suppress false positives by creating an allow-list.xml file and adding CVEs. For more information, refer to the [OWASP Dependency Check documentation](https://jeremylong.github.io/DependencyCheck/general/suppression.html). 
+
+You can exclude dependencies from the scan by adding `--exclude` in the args of your action see the [OWASP Dependency Check documentation](https://jeremylong.github.io/DependencyCheck/dependency-check-cli/arguments.html). There are various command line arguments available for your specific needs. 
+
 ## Supported languages
 
 ### NodeJS
