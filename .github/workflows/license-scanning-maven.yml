@@ -38,11 +38,6 @@ jobs:
         echo "License issues found ..."
         if [ $LINES_FOUND -gt 1 ]; then echo $LICENSE_REPORT ; exit -1; fi
       working-directory: maven
-    - name: Upload license reports
-      uses: actions/upload-artifact@v3
-      with:
-        name: license-reports
-        path: 'maven/**/dependencies.html'
     - name: Upload license XML reports
       uses: actions/upload-artifact@v3
       with:
