@@ -93,4 +93,13 @@
         <cve>CVE-2020-17530</cve>
     </suppress>
 
+ <suppress>
+   <notes><![CDATA[
+   file name: sample-project-0.0.1.jar (shaded: commons-fileupload:commons-fileupload:1.2.2)
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/commons\-fileupload/commons\-fileupload@.*$</packageUrl>
+   <cve>CVE-2013-0248</cve>
+   <cve>CVE-2023-50164</cve>
+   <cve>CVE-2023-41835</cve>  
+</suppress>
 </suppressions>
