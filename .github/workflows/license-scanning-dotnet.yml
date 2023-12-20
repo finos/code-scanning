@@ -1,4 +1,4 @@
-name: License Scanning
+name: License Scanning dotnet
 
 on:
   push:
