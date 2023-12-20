@@ -99,7 +99,14 @@
    ]]></notes>
    <packageUrl regex="true">^pkg:maven/commons\-fileupload/commons\-fileupload@.*$</packageUrl>
    <cve>CVE-2013-0248</cve>
+</suppress>
+
+<suppress>
+   <notes><![CDATA[
+   file name: sample-project-0.0.1.jar (shaded: org.apache.struts:struts2-core:2.3.8)
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/org\.apache\.struts/struts2\-core@.*$</packageUrl>
    <cve>CVE-2023-50164</cve>
-   <cve>CVE-2023-41835</cve>  
+   <cve>CVE-2023-41835</cve> 
 </suppress>
 </suppressions>
