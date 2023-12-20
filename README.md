@@ -294,7 +294,7 @@ For this reason, we are working on automated tasks to continuously scan licenses
 - Run a scanning process that takes as input the list of allowed licenses and the packages to ignore (preferred)
 - Build a report of licenses that can be manually reviewed and checked
 
-Right now, we have managed to automate [license scanning on Maven](.github/workflows/license-scanning-maven.yml), [Python](.github/workflows/license-scanning-python.yml) and [Node.js](.github/workflows/license-scanning-node.yml) and our intention is to cover also other languages/platforms with the same mechanisms.
+Right now, we have managed to automate [license scanning on Maven](.github/workflows/license-scanning-maven.yml), [Python](.github/workflows/license-scanning-python.yml), [Dotnet](https://github.com/finos/code-scanning/actions/workflows/license-scanning-dotnet.yml), [Rust](https://github.com/finos/code-scanning/actions/workflows/license-scanning-rust.yml), [Node.js](.github/workflows/license-scanning-node.yml) and our intention is to cover also other languages/platforms with the same mechanisms.
 
 For more info about compliance requirements at FINOS, checkout our [Contribution Compliance Requirements](https://community.finos.org/docs/governance/Software-Projects/contribution-compliance-requirements) and [License Categories](https://community.finos.org/docs/governance/Software-Projects/license-categories) pages.
 
