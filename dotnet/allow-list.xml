@@ -6,4 +6,10 @@
         ]]></notes>
         <cve>CVE-2022-41064</cve>
     </suppress>
+    <suppress>
+          <notes><![CDATA[
+        Testing false positives by suppressing a CVE
+        ]]></notes>
+        <cve>CVE-2024-0056</cve>
+    </suppress>
 </suppressions>
