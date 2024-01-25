@@ -60,4 +60,5 @@ check {
 licenseReport {
     configurations = ALL
     allowedLicensesFile = new File("allowed-licenses.json")
+    filters = [new LicenseBundleNormalizer(bundlePath: "license-normalizer-bundle.json")]
 }
