@@ -1,0 +1,50 @@
+
+{
+  "bundles": [
+    {
+      "bundleName": "BSD Zero Clause",
+      "licenseName": "BSD Zero Clause License",
+      "licenseUrl": "https://opensource.org/licenses/0BSD"
+    },
+    {
+      "bundleName": "Apache 2.0",
+      "licenseName": "Apache License, Version 2.0",
+      "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "bundleName": "Eclipse Public License 1.0",
+      "licenseName": "Eclipse Public License - v 1.0",
+      "licenseUrl": "http://www.eclipse.org/legal/epl-v10.html"
+    },
+    {
+      "bundleName": "MIT License",
+      "licenseName": "MIT License",
+      "licenseUrl": "https://opensource.org/licenses/MIT"
+    },
+    {
+      "bundleName": "BSD-style",
+      "licenseName": "BSD-style license",
+      "licenseUrl": "http://freemarker.org/LICENSE.txt"
+    },
+    {
+      "bundleName": "BSD 2-Clause",
+      "licenseName": "The 2-Clause BSD License",
+      "licenseUrl": "https://opensource.org/licenses/BSD-2-Clause"
+    }
+  ],
+  "transformationRules": [
+    {
+      "bundleName": "Apache 2.0",
+      "licenseNamePattern": ".*Apache License, Version 2.0.*"
+    },
+    {
+      "bundleName": "Apache 2.0",
+      "licenseNamePattern": "Apache 2"
+    },
+    {
+      "bundleName": "Apache 2.0",
+      "licenseUrlPattern": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "dependenciesWithoutAllowedLicenses": []
+}
