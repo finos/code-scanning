@@ -5,6 +5,22 @@
         },
         {
             "moduleLicense": "Eclipse Public License - v1.0"
+        },
+        {
+            "moduleLicense": "BSD Zero Clause License"
+        },
+        {
+            "moduleLicense": "MIT License"
+        },
+        {
+            "moduleLicense": "BSD-style license"
+        },
+        {
+            "moduleLicense": "The 2-Clause BSD License"
+        },
+        {
+            "moduleLicense": "Eclipse Public License - v 1.0"
         }
+        
     ]
 }
