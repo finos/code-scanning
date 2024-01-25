@@ -19,8 +19,6 @@ repositories {
 dependencies {
     implementation 'com.google.guava:guava:32.0.1-jre'
     implementation "joda-time:joda-time:2.12.5"
-    implementation "org.apache.struts:struts2-core:2.3.8"
-    // testImplementation "org.apache.struts:struts2-core:2.3.8"
     testImplementation "junit:junit:4.13.2"
 }
 
