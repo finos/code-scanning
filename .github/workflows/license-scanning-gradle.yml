@@ -21,6 +21,6 @@ jobs:
         run: ./gradlew build
         working-directory: gradle
 
-      - name: Generate License Report
+      - name: License Scanning
         run: ./gradlew check
         working-directory: gradle
