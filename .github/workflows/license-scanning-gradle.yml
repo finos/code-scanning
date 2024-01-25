@@ -16,11 +16,7 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-
-      - name: Build project with Gradle
-        run: ./gradlew build
-        working-directory: gradle
-
+          
       - name: License Scanning
         run: ./gradlew check
         working-directory: gradle
