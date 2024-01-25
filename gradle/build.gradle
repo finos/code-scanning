@@ -57,6 +57,9 @@ check {
     dependsOn checkLicense
 }
 
+import com.github.jk1.license.filter.LicenseBundleNormalizer
+import com.github.jk1.license.render.*
+
 licenseReport {
     configurations = ALL
     allowedLicensesFile = new File("allowed-licenses.json")
