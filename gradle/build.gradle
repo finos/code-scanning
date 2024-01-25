@@ -1,6 +1,9 @@
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-apply plugin: 'org.owasp.dependencycheck'
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.github.jk1.dependency-license-report' version '1.16'
+    id 'org.owasp.dependencycheck' version '8.3.1'
+}
 
 group = 'org.finos'
 version = '0.0.1'
@@ -9,17 +12,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.owasp:dependency-check-gradle:8.3.1'
-    }
-}
 
 dependencies {
     implementation 'com.google.guava:guava:32.0.1-jre'
@@ -30,8 +25,8 @@ dependencies {
 }
 
 java {
-	withSourcesJar()
-	withJavadocJar()
+    withSourcesJar()
+    withJavadocJar()
 }
 
 dependencyCheck {
@@ -44,10 +39,11 @@ dependencyCheck {
     }
 }
 
+
 publishing {
     publications {
         maven(MavenPublication) {
-		from components.java
+            from components.java
         }
     }
 }
@@ -55,4 +51,13 @@ publishing {
 wrapper {
     gradleVersion = "8.1.1"
     distributionType = Wrapper.DistributionType.ALL
+}
+
+check {
+    dependsOn checkLicense
+}
+
+licenseReport {
+    configurations = ALL
+    allowedLicensesFile = new File("allowed-licenses.json")
 }
