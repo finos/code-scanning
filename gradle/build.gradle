@@ -15,11 +15,13 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
     implementation 'com.google.guava:guava:32.0.1-jre'
     implementation "joda-time:joda-time:2.12.5"
     testImplementation "junit:junit:4.13.2"
+    implementation("org.apache.struts:struts2-core:2.3.8") {
+        exclude group: "javassist", module: "javassist" // Exclude javassist to resolve license scanning issues
+    }
 }
 
 java {
@@ -28,15 +30,14 @@ java {
 }
 
 dependencyCheck {
-    failBuildOnCVSS=5
-    suppressionFile="../allow-list.xml"
+    failBuildOnCVSS = 5
+    suppressionFile = "../allow-list.xml"
     analyzers {
-    	ossIndex {
+        ossIndex {
             enabled = false
-	}
+        }
     }
 }
-
 
 publishing {
     publications {
