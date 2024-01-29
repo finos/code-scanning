@@ -1,0 +1,22 @@
+name: License Scanning for Gradle
+
+on:
+  push:
+
+jobs:
+  license-scan:
+    runs-on: ubuntu-latest
+    name: License Scan
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+          
+      - name: License Scanning
+        run: ./gradlew check
+        working-directory: gradle

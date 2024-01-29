@@ -1,6 +1,9 @@
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-apply plugin: 'org.owasp.dependencycheck'
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.github.jk1.dependency-license-report' version '1.16'
+    id 'org.owasp.dependencycheck' version '8.3.1'
+}
 
 group = 'org.finos'
 version = '0.0.1'
@@ -9,45 +12,37 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-  mavenCentral()
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.owasp:dependency-check-gradle:8.3.1'
-    }
+    mavenCentral()
 }
 
 dependencies {
     implementation 'com.google.guava:guava:32.0.1-jre'
     implementation "joda-time:joda-time:2.12.5"
-    implementation "org.apache.struts:struts2-core:2.3.8"
-    // testImplementation "org.apache.struts:struts2-core:2.3.8"
     testImplementation "junit:junit:4.13.2"
+    implementation("org.apache.struts:struts2-core:2.3.8") {
+        exclude group: "javassist", module: "javassist" // Exclude javassist to resolve license scanning issues
+    }
 }
 
 java {
-	withSourcesJar()
-	withJavadocJar()
+    withSourcesJar()
+    withJavadocJar()
 }
 
 dependencyCheck {
-    failBuildOnCVSS=5
-    suppressionFile="../allow-list.xml"
+    failBuildOnCVSS = 5
+    suppressionFile = "../allow-list.xml"
     analyzers {
-    	ossIndex {
+        ossIndex {
             enabled = false
-	}
+        }
     }
 }
 
 publishing {
     publications {
         maven(MavenPublication) {
-		from components.java
+            from components.java
         }
     }
 }
@@ -55,4 +50,17 @@ publishing {
 wrapper {
     gradleVersion = "8.1.1"
     distributionType = Wrapper.DistributionType.ALL
+}
+
+check {
+    dependsOn checkLicense
+}
+
+import com.github.jk1.license.filter.LicenseBundleNormalizer
+import com.github.jk1.license.render.*
+
+licenseReport {
+    configurations = ALL
+    allowedLicensesFile = new File("allowed-licenses.json")
+    filters = [new LicenseBundleNormalizer(bundlePath: "license-normalizer-bundle.json")]
 }
