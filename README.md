@@ -284,7 +284,7 @@ In order to test it locally, make sure to:
 4. (optional) `export SEMGREP_APP_TOKEN=<your personal semgrep token>` - to aggregate results into FINOS (private) dashboard
 5. Run `semgrep scan --error --config auto` from the root folder, here the docs to [install semgrep locally](https://semgrep.dev/docs/getting-started/)
 
-## License reporting and scanning
+## License scanning and reporting
 
 To enforce compliance of open source projects, it is crucial to validate that inbound libraries adopt a license that is "compatible" with the outbound one in terms of rights and obligations; for FINOS, the outbound license used is the [Apache License v2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)).
 
@@ -294,7 +294,13 @@ For this reason, we are working on automated tasks to continuously scan licenses
 - Run a scanning process that takes as input the list of allowed licenses and the packages to ignore (preferred)
 - Build a report of licenses that can be manually reviewed and checked
 
-Right now, we have managed to automate [license scanning on Maven](.github/workflows/license-scanning-maven.yml), [Python](.github/workflows/license-scanning-python.yml), [Dotnet](https://github.com/finos/code-scanning/actions/workflows/license-scanning-dotnet.yml), [Rust](https://github.com/finos/code-scanning/actions/workflows/license-scanning-rust.yml), [Node.js](.github/workflows/license-scanning-node.yml) and our intention is to cover also other languages/platforms with the same mechanisms.
+Right now, we have managed to automate license scanning and reporting on:
+- [Maven](.github/workflows/license-scanning-maven.yml)
+- [Python](.github/workflows/license-scanning-python.yml)
+- [Dotnet](https://github.com/finos/code-scanning/actions/workflows/license-scanning-dotnet.yml)
+- [Rust](https://github.com/finos/code-scanning/actions/workflows/license-scanning-rust.yml)
+- [Node.js](.github/workflows/license-scanning-node.yml)
+- [Gradle](.github/workflows/license-scanning-gradle.yml) - The `allowed-licenses.json` file allows to ignore specific libraries/licenses, whereas `license-normalizer-bundle.json` allows to define license _aliases_, such as `Apache License Version 2.0` and `Apache License, Version 2.0`. Note that the `build.gradle` needs to be changed to make use of the [Gradle-License-Report](https://github.com/jk1/Gradle-License-Report) plugin
 
 For more info about compliance requirements at FINOS, checkout our [Contribution Compliance Requirements](https://community.finos.org/docs/governance/Software-Projects/contribution-compliance-requirements) and [License Categories](https://community.finos.org/docs/governance/Software-Projects/license-categories) pages.
 
