@@ -140,8 +140,8 @@ To run `Safety` locally:
 1. Access the folder containing the `requirements.txt` file
 2. Make sure you're running Python 3.x using `python --version`, otherwise the version of `safety` that you're able to use would be quite outdated
 3. Create a virtual environment using `python -m venv .`
-4. Install safety with `pip install safety` - we need to run this step since the scanning will run through all libraries available in the current Python environment
-5. Run safety with `safety check --full-report -r requirements.txt`
+4. Install safety with `./bin/pip install safety` - we need to run this step since the scanning will run through all libraries available in the current Python environment
+5. Run safety with `./bin/safety check --full-report -r requirements.txt`
 6. If you want to ignore errors, create a [safety-policy.yml](python/safety-policy.yml) and append ` --policy-file safety-policy.yml` to the command on step 4
 7. You should see from this example 1 vulnerability - `Vulnerability found in insecure-package version 0.1.0`
 
