@@ -274,7 +274,7 @@ It also provides ways to [ignore false positives](https://semgrep.dev/docs/ignor
 
 In order to use it, you need to
 1. Sign up for free on https://semgrep.dev and generate a token
-2. Create a GitHub Secret called `SEMGREP_APP_TOKEN`, with the token earlier created as value. If you want to enable scanning on a FINOS hosted repository, please email [help@finos.org](mailto:help@finos.org) and they will take care of setting the `SEMGREP_APP_TOKEN` secret on the GitHub repository.
+2. Create a GitHub Secret called `SEMGREP_APP_TOKEN`, with the token earlier created as value. If you want to enable scanning on a FINOS hosted repository, please email [help@finos.org](mailto:help@finos.org) and they will take care of setting the `SEMGREP_APP_TOKEN` secret on the GitHub repository and enabling the Semgrep GitHub app.
 3. Run `semgrep scan --error --config auto`
 
 In order to test it locally, make sure to:
