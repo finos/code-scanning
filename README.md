@@ -1,13 +1,11 @@
-<img src="https://github.com/finos/finos-landscape/blob/master/hosted_logos/finos-code-scanning.svg" alt="FINOS Code Scanning" width="200"/>
 
-[![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
+[![FINOS - Archived](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-archived.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/archived)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
 [![Gradle CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-gradle.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-gradle.yml)
 [![Maven CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-maven.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-maven.yml)
 [![Node.js CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-node.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-node.yml)
 [![Poetry CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-python.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-python.yml)
 [![Rust CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-rust.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-rust.yml)
-[![Scala CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-scala.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-scala.yml)
 [![Static code analysis](https://github.com/finos/code-scanning/actions/workflows/semgrep-ci.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/semgrep-ci.yml)
 
 ## Table of contents
