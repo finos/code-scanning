@@ -1,5 +1,12 @@
+[![FINOS - Archived](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-archived.svg)](https://community.finos.org/docs/governance/lifecycle-stages/archived)
 
-[![FINOS - Archived](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-archived.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/archived)
+> [!WARNING]
+> **This repository is archived and in a read-only state.**
+> The content of this repository was merged into the main FDC repo (https://github.com/finos/fdc3) to make it easier to maintain against the FDC3 standard.
+> You are welcome to download, clone, or fork this code, but please be aware that it is no longer actively maintained and may contain bugs or security vulnerabilities.
+>
+> **Interested in reviving this project?** If you would like to restore development activities, please contact the team at help@finos.org.
+
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
 [![Gradle CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-gradle.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-gradle.yml)
 [![Maven CI](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-maven.yml/badge.svg)](https://github.com/finos/code-scanning/actions/workflows/cve-scanning-maven.yml)
